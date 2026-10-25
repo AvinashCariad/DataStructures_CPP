@@ -1,0 +1,170 @@
+/*
+	Given a vertex of a directed graph, the task is to clone the graph that is reachable from that
+	vertex. The clone should be a copy.
+	
+	Input: vertex (Structure: int label, list of edges)
+	Output: Graph Clone, return the clone vertex of the input vertex
+	
+	Solution:
+		We use graph traversal for reaching the vertices. We use hash table for keeping track of
+		unvisited nodes. During traversal for every new edge we make a corresponding clone.
+		
+		TC: O(V + E)
+		SC: O(V + E): for creating the graph and for hash table
+*/
+#include<iostream>
+#include<unordered_map>
+#include<deque>
+#include<vector>
+#include<queue>
+using namespace std;
+
+// strcuture for vertex
+struct Vertex{
+	int data;
+	deque<Vertex*> edges;
+};
+
+// for creating a graph vertex
+Vertex* createNode(const int& data){
+	Vertex* vertex = new Vertex;
+	if(vertex){
+		vertex->data = data;
+		vertex->edges = deque<Vertex*>{};
+	}
+	return vertex;
+}
+
+// for creating a graph with input number of vertices 
+vector<Vertex*> createGraph(const int& count){
+	// vector of all graph nodes
+	vector<Vertex*> g;
+	
+	for(int i = 0; i < count; i++){
+		g.emplace_back(createNode(i));        // add nodes to the graph, this also creates the placeholder for edges	
+	}
+	
+	return g;
+}
+
+// for adding an edge to the graph
+void addEdge(Vertex*& u, Vertex*& v){
+	u->edges.push_back(v);	
+}
+
+// for printing the graph
+void printGraph(const vector<Vertex*>& g){
+	for(auto node: g){
+		cout << node->data << ": ";
+		for(auto edge: node->edges){
+			cout << edge->data << " ";
+		}
+		cout << endl;
+	}
+}
+
+// use DFS for cloning the graph
+void doDFS(Vertex* u_orig, Vertex* u_copy, vector<Vertex*>& clone, unordered_map<int, Vertex*>& visited){
+	// make the node visited
+	visited[u_orig->data] = u_copy;
+	
+	// traverse the adjacent edges 
+	// and clone the edges as we go
+	for(Vertex* v: u_orig->edges){
+		// traverse the node only if it is unvisited
+		if(visited.find(v->data) == visited.end()){
+			// make a copy of node
+			Vertex* v_copy = createNode(v->data);
+			// add the node to the cloned graph
+			clone.emplace_back(v_copy);
+		
+			// do DFS 
+			doDFS(v, v_copy, clone, visited);
+		}
+		// create a copy of edge
+		u_copy->edges.push_back(visited[v->data]);
+	}
+}
+
+// use BFS for cloning the graph
+void doBFS(Vertex*& u_orig, Vertex*& u_copy, vector<Vertex*>& clone, unordered_map<int, Vertex*>& visited){
+	// for BFS
+	queue<Vertex*> q;
+	// add the node to queue and make it visited
+	q.push(u_orig);
+	visited[u_orig->data] = u_copy;         // note how the visited is maintained
+	// for keeping track of current vertex
+	Vertex* curr = nullptr;
+	
+	while(!q.empty()){
+		curr = q.front();
+		q.pop();
+		
+		// traverse the adjacent nodes
+		for(Vertex* v: curr->edges){
+			// if the node is unvisited, then create a copy of it
+			if(visited.find(v->data) == visited.end()){
+				// create a copy
+				Vertex* v_copy = createNode(v->data);
+				clone.emplace_back(v_copy);
+				q.push(v);
+				// make it visited
+				visited[v->data] = v_copy;
+			}
+			
+			// clone the edge
+			visited[curr->data]->edges.push_back(visited[v->data]);
+		}
+	}
+}
+
+
+
+
+// for cloning the graph
+vector<Vertex*> cloneGraph(Vertex* u, string method = "DFS"){
+	if(!u)
+		return vector<Vertex*>{};
+	// create the root node
+	vector<Vertex*> clone;
+	// for keeping track of visited nodes,
+	// we map each label node to their address
+	unordered_map<int, Vertex*> visited;
+	
+	// make a copy of root node
+	Vertex* u_copy = createNode(u->data);
+	// add the node to the cloned graph
+	clone.emplace_back(u_copy);
+	
+	// for cloning we can use either BFS or DFS
+	if(method == "DFS")
+		doDFS(u, u_copy, clone, visited);
+	else if(method == "BFS")
+		doBFS(u, u_copy, clone, visited);
+	
+	return clone;
+}
+
+
+// main code harness:
+int main(int argc, char** argv){
+	vector<Vertex*> g = createGraph(5);
+	
+	// add edges
+	addEdge(g[0], g[1]);
+	addEdge(g[1], g[2]);
+	addEdge(g[2], g[0]);
+	addEdge(g[2], g[3]);
+	addEdge(g[3], g[4]);
+	printGraph(g);
+	
+	cout << endl << "DFS" << endl;
+	vector<Vertex*> cloned_graph = cloneGraph(g[0], "DFS");
+	printGraph(cloned_graph);
+	
+	cout << endl << "BFS" << endl;
+	cloned_graph = cloneGraph(g[0], "BFS");
+	printGraph(cloned_graph);
+	
+	return 0;
+}
