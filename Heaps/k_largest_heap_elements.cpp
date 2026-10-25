@@ -1,0 +1,170 @@
+/* 
+	Given a max-heap in array form. Find the k largest elements from the heap without modifying the array.
+
+	Input: int array
+	Output: k largest int vector
+	
+	Solution:
+		We can use a max-heap. The root element is sure to be the largest, so push it in heap.
+		Now every time we pop the max element from heap and add to result vector and for the 
+		max element, we push child nodes. Since inside the tree we should move towards the side
+		which has larger parent elements so that we get larger nodes. This is supported by the fact that in heap, the parent is atleast
+		greater/equal than its children. So each time we add only child of current largest node.
+		
+		
+		TC: O(klogk),  
+		SC: O(k) for heap
+*/
+
+
+
+#include <iostream>
+#include <vector>
+#include <string>
+#include <queue>
+#include <sstream>
+
+using namespace std;
+
+struct HeapElement {
+	int data;
+	int idx;
+	
+	HeapElement(int data, int idx) : data(data), idx(idx) {};
+};
+
+// finds the k largest heap elements (Changed int& k to int k)
+vector<int> kLargestHeapElements(const vector<int>& heap, int k) {
+	if(heap.empty() || k <= 0)
+		return vector<int>{};
+
+	// Cleaner, faster max-heap initialization using decltype
+	auto comp = [](const HeapElement& a, const HeapElement& b) {
+		return a.data < b.data;
+	};
+
+	// define the proiority queue of the heap elements:
+	priority_queue<HeapElement, vector<HeapElement>, decltype(comp)> max_heap(comp);
+
+	// start with the root of input heap
+	max_heap.emplace(heap[0], 0);
+
+	vector<int> k_largest;
+	int i = 0;
+	
+	while(!max_heap.empty() && i < k) {
+		// take the current largest 
+		HeapElement curr_largest = max_heap.top();
+		max_heap.pop();
+		
+		// add to results
+		k_largest.emplace_back(curr_largest.data);
+		++i;
+
+		// add its child nodes if they exist
+		int left_idx = 2 * curr_largest.idx + 1;
+		int right_idx = 2 * curr_largest.idx + 2;
+
+		if(left_idx < heap.size()) 
+			max_heap.emplace(heap[left_idx], left_idx);
+			
+		if(right_idx < heap.size())
+			max_heap.emplace(heap[right_idx], right_idx);
+	}
+
+	return k_largest;
+}
+
+// Fixed overloading << 
+template<typename T>
+ostream& operator<<(ostream& out, const vector<T>& arr) { // Added const&
+	for(const auto& a: arr)
+		out << a << ", "; // Changed cout to out
+	out << endl;
+	return out;       // Added return statement
+}
+
+// main code harness:
+int main(int argc, char** argv) {
+	int k = 3;
+	vector<int> heap = {562, 314, 401, 28, 156, 359, 271, 11, 3};
+	cout << kLargestHeapElements(heap, k); // Will correctly print: 562, 401, 359, 
+	return 0;
+}
+
+
+
+
+/*
+#include <iostream>
+#include <vector>
+#include <string>
+#include <queue>
+#include <sstream>
+#include <functional>
+using namespace std;
+
+struct HeapElement{
+	int data;
+	int idx;
+	
+	HeapElement(int data, int idx) : data(data), idx(idx) {}
+};
+
+// finds the k largest heap elements
+vector<int> kLargestHeapElements(vector<int>& heap, int& k) {
+	if(heap.size() < 1 || k <= 0)
+		return vector<int>{};
+
+	// max-heap
+	priority_queue<HeapElement, vector<HeapElement>, function<bool(HeapElement, HeapElement)>> 
+		max_heap([](const HeapElement& a, const HeapElement& b)->bool{
+			return a.data < b.data;
+		});
+	// start with the root of input heap
+	max_heap.emplace(HeapElement{heap[0], 0});
+
+	vector<int> k_largest;
+	int i = 0;
+	HeapElement curr_largest = HeapElement{heap[0], 0};
+	
+	while(!max_heap.empty() && i < k) {
+		// take the current largest 
+		curr_largest = max_heap.top();
+		max_heap.pop();
+		
+		// add its child nodes
+		// left child
+		if((2 * curr_largest.idx  + 1) < heap.size()) 
+			max_heap.emplace(HeapElement{heap[2 * curr_largest.idx  + 1], 2 * curr_largest.idx  + 1});
+		// right child
+		if((2 * curr_largest.idx  + 2) < heap.size())
+			max_heap.emplace(HeapElement{heap[2 * curr_largest.idx  + 2], 2 * curr_largest.idx  + 2});
+		
+		// add to results
+		k_largest.emplace_back(curr_largest.data);
+		++i;
+	}
+
+	return k_largest;
+}
+
+// overloading << for directly viewing the vector elements
+template<typename T>
+ostream&  operator<<(ostream& out, vector<T> arr) {
+	for(const auto& a: arr)
+		cout << a << ", ";
+	cout << endl;
+}
+
+
+// main code harness:
+int main(int argc, char** argv) {
+	int k = 3;
+	vector<int> heap = {562, 314, 401, 28, 156, 359, 271, 11, 3};
+	cout << kLargestHeapElements(heap, k);
+	return 0;
+}
+
+
+*/

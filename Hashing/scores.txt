@@ -1,0 +1,16 @@
+Alice 80
+Bob 95
+David 78
+Alice 90
+Charlie 99
+Bob 70
+David 92
+Alice 100
+Bob 85
+Charlie 98
+David 88
+Alice 70
+Bob 100
+David 95
+Emma 100
+Emma 95
