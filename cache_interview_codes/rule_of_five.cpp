@@ -114,3 +114,35 @@ int main(int argc, char** argv) {
     std::cout << "\n--- Scope Ending: Destructors will clean up remaining objects ---\n";
     return 0;
 }
+
+
+
+
+/*
+//• Copying: Like making a photocopy of a giant binder. You now have two physical 
+// binders, which takes time and paper (memory allocation and deep copying).
+
+//• Moving: Like taking the label off your binder and taping it onto someone else’s. 
+//The heavy documents inside never move, but the ownership changes instantly. 
+//This turns an expensive O(N) operation into a cheap O(1) shallow pointer swap
+
+
+
+#include <iostream>
+#include <string>
+#include <utility> // Required for std::move
+
+int main() {
+    std::string str1 = "Hello World, this is a very long string!";
+    
+    // std::move(str1) changes the type to std::string&&
+    // This triggers the move constructor of std::string
+    std::string str2 = std::move(str1); 
+
+    std::clog << "str2: " << str2 << "\n"; 
+    // str1 is now in a "valid but unspecified" state. Usually, it's empty.
+    std::clog << "str1: " << str1 << "\n"; 
+}
+
+
+*/

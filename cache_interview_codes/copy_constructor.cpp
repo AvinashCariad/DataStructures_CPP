@@ -62,8 +62,6 @@ int main(int argc, char** argv) {
 }
 
 
-
-
 /*
 // correct version of the code will be:
 

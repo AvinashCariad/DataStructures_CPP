@@ -8,7 +8,6 @@ public:
     void doWork() { std::cout << "Unique pointer working\n"; }
 };
 
-
 // main code harness:
 int main(int argc, char** argv) {
    /*
@@ -24,7 +23,6 @@ int main(int argc, char** argv) {
     ptr1->doWork();
 
     // std::unique_ptr<Resource> ptr2 = ptr1; // ERROR: Copying is forbidden!
-
     // Transferring ownership using move semantics
     std::unique_ptr<Resource> ptr2 = std::move(ptr1); 
     if (!ptr1) {
@@ -32,14 +30,12 @@ int main(int argc, char** argv) {
     }
 
     /*
-    
     • Properties: It maintains an internal reference count 
       (tracked in a separate hidden control block). Every time
        a new shared_ptr copies it, the count goes up. When a shared_ptr
        is destroyed, the count goes down. The actual heap memory is deleted
         only when the reference count drops to exactly zero.
     • Best Practice: Always use std::make_shared for speed and memory efficiency.
-    
     */
 
     // Create a shared resource (Reference Count = 1)
@@ -52,7 +48,6 @@ int main(int argc, char** argv) {
         std::cout << "Inside block Count: " << shared1.use_count() << "\n";
         std::cout << "Value via shared2: " << *shared2 << "\n";
     } // shared2 goes out of scope here (Reference Count drops back to 1)
-    
     
     /*
     • Properties: It does not increment the reference count. It is primarily used to
