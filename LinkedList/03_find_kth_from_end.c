@@ -36,7 +36,7 @@ struct node* find_kth_node_from_end(struct node *head, int k)
 
     n1 = head;
     for (i = 1; i <= length; ++i) {
-        if (i == length - k + 1) {
+        if (i == length - k + 1) {         // check if the current node is the kth node from end
             return n1;  /*n1 is the kth node from end. So return it*/
         }
         n1 = n1->next;
@@ -45,8 +45,6 @@ struct node* find_kth_node_from_end(struct node *head, int k)
     /*k value passed doesn't match with the linked list. So return NULL */
     return NULL;
 }
-
-
 
 
 struct node* construct_list(int num_elements)
@@ -68,7 +66,6 @@ struct node* construct_list(int num_elements)
 
     return head;
 }
-
 
 void destroy_list(struct node* head) 
 {
@@ -92,7 +89,9 @@ void print_list(struct node *head)
     printf("\n");
 }
 
-int main()
+
+// main code harness:
+int main(int argc, char** argv)
 {
     struct node *head  ;
     struct node *k_node;

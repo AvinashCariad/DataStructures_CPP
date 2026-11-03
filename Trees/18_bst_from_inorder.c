@@ -1,10 +1,4 @@
-/*
-Copyright (C) 2017 Interview Druid, Parineeth M. R.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,7 +16,6 @@ struct node
 
     struct node *left;
     struct node *right;
-
     struct node *parent;
 
 };
@@ -118,10 +111,9 @@ void traverse_in_order(struct node *cur_node, int *in_array, int *pos_p)
         return;
 
     traverse_in_order(cur_node->left, in_array, pos_p);
-
+    
     in_array[*pos_p] = cur_node->data;
     (*pos_p)++;
-
 
     traverse_in_order(cur_node->right, in_array, pos_p);
 }
@@ -250,12 +242,11 @@ void test_01()
 }
 
 
-int main()
+// main code harness:
+int main(int argc, char *argv[])
 {
 
     test_01();
-
     printf("Test passed\n");
-
     return 0;
 }

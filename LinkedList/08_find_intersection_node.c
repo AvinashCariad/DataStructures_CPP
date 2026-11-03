@@ -45,7 +45,6 @@ struct node* construct_list(int num_elements, int start_value)
 }
 
 
-
 void print_list(struct node* head) 
 {
     struct node* cur_node = head;
@@ -182,7 +181,9 @@ void test()
     printf("________________________________________________\n");
 }
 
-int main()
+
+// main code harness: 
+int main(int argc, char** argv)
 {
     int i;
 

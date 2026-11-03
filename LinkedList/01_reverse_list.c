@@ -16,7 +16,6 @@ void handle_error(void)
     exit(1);
 }
 
-
 void print_list(struct node* head) 
 {
     struct node* cur_node = head;
@@ -38,7 +37,6 @@ void destroy_list(struct node* head)
         free(temp_node);
     }
 }
-
 
 
 /* Reverses the linked list without using recursion
@@ -90,9 +88,6 @@ struct node* reverse_linked_list_r(struct node *cur_node) {
     cur_node->next = NULL;
     return new_head;
 }
-
-
-
 
 
 struct node* construct_list(int num_elements)
@@ -152,11 +147,12 @@ void test_non_recursive()
         }
 
         destroy_list(head);
-
+        
         printf("_______________________________________________\n");
     }
 
 }
+
 
 void test_recursive()
 {
@@ -202,16 +198,11 @@ void test_recursive()
 
 }
 
-
-
-
-int main()
+// main code harness:
+int main(int argc, char** argv)
 {
     test_non_recursive();
-
     test_recursive();
-
     printf("Test passed\n");
-
     return 0;
 }

@@ -15,9 +15,7 @@ struct node
 
     struct node *left;
     struct node *right;
-
     struct node *parent;
-
     struct node *next;
 
 };
@@ -152,11 +150,6 @@ int compute_vertical_sum(struct node *root, int ** sum_array_pp)
 }
 
 
-
-
-
-
-
 void test_01()
 {
     struct node *root;
@@ -191,12 +184,12 @@ void test_01()
 }
 
 
-int main()
+
+// main code harness:
+int main(int argc, char *argv[])
 {
 
     test_01();
-
     printf("Test passed\n");
-
     return 0;
 }

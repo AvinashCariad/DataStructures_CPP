@@ -16,10 +16,8 @@ void handle_error(void)
 struct node
 {
     int data;
-
     struct node *left;
     struct node *right;
-
     struct node *parent;
 
 };
@@ -38,22 +36,15 @@ struct node * construct_bst (struct node *parent, int values[], int low, int hig
     struct node *new_node;
 
     if (low > high) {
-
         return NULL;
     }
 
     middle = (low + high) / 2;
-
     new_node = (struct node*) calloc(1, sizeof(struct node));
-
     new_node->data = values[middle];
-
     new_node->parent = parent;
-
     new_node->left = construct_bst(new_node, values, low, middle - 1);
-
     new_node->right = construct_bst(new_node, values, middle + 1, high);
-
     return new_node;
 
 }
@@ -65,7 +56,6 @@ void destroy_tree(struct node *cur_node)
 
     destroy_tree(cur_node->left);
     destroy_tree(cur_node->right);
-
     free(cur_node);
 }
 
@@ -120,7 +110,7 @@ int is_symmetric(struct node * root) {
 
 
 // main code harness:
-int main()
+int main(int argc, char *argv[])
 {
     struct node *root1, *root2;
     struct node main_root;

@@ -1,10 +1,4 @@
-/*
-Copyright (C) 2017 Interview Druid, Parineeth M. R.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,9 +16,7 @@ struct node
 
     struct node *left;
     struct node *right;
-
     struct node *parent;
-
     struct node *next;
 
 };

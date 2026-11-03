@@ -8,12 +8,9 @@
 struct node
 {
     int data;
-
     int depth;
-
     struct node *left;
     struct node *right;
-
     struct node *parent;
 };
 
@@ -169,8 +166,8 @@ void print_result(int result)
 }
 
 
-
-int main()
+// main code harness:
+int main(int argc, char *argv[])
 {
     struct node *root;
     int i, num_elems, number_array[MAX_NUM_NODES_IN_TREE];

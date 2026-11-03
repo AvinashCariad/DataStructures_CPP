@@ -20,7 +20,7 @@ public:
     StrVec();                               // Default constructor
     StrVec(std::initializer_list<std::string>); // Initializer-list constructor
     StrVec(const StrVec&);                  // Copy constructor
-    StrVec(StrVec&&) noexcept;               // Move constructor
+    StrVec(StrVec&&) noexcept;               // Move constructor, note this imp 
     StrVec& operator=(const StrVec&);       // Copy assignment
     StrVec& operator=(StrVec&&) noexcept;    // Move assignment
     ~StrVec();                              // Destructor
@@ -137,7 +137,7 @@ void StrVec::free() {
         for (auto p = first_free; p != elements; /* empty */) {
             alloc.destroy(--p);
         }
-        alloc.deallocate(elements, cap - elements);
+        alloc.deallocate(elements, cap - elements);      // now deallocate the memory assigned
     }
 }
 
@@ -219,3 +219,39 @@ int main(int argc, char** argv) {
 
     return 0;
 }
+
+
+
+/*
+
+#include <iostream>
+#include <vector>
+#include <initializer_list>
+
+class CustomContainer {
+private:
+    std::vector<int> data;
+
+public:
+    // Constructor accepting an initializer_list
+    CustomContainer(std::initializer_list<int> list) : data(list) {
+        std::cout << "Constructed with " << list.size() << " elements.\n";
+    }
+
+    void print() const {
+        for (int val : data) {
+            std::cout << val << " ";
+        }
+        std::cout << "\n";
+    }
+};
+
+// main code harness:
+int main(int argc, char** argv) {
+    // Instantiating using standard uniform braced initialization syntax
+    CustomContainer container = {10, 20, 30, 40};
+    container.print(); // Output: 10 20 30 40
+}
+
+
+*/

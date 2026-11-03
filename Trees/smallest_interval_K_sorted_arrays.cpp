@@ -59,7 +59,7 @@ int findKSmallestInterval(vector<vector<int>>& arr) {
         k_interval.emplace(arr[i][0], IteratorInfo{arr[i].begin(), arr[i].end()});
     }
 
-    int min_diff = numeric_limits<int> :: max();
+    int min_diff = numeric_limits<int>::max();
     // everytime we pick the smallest amongst K and try to replace it with the next larger element 
     // as the lower limit
     while(true) {
@@ -95,7 +95,9 @@ void inOrderTraversal(Node<T>* iter) {
     }
 }
 
-int main() {
+
+// main code harness
+int main(int argc, char *argv[]) {
     vector<vector<int>> arr = {
     	{5,10,15},
     	{3,6,9,12,15},

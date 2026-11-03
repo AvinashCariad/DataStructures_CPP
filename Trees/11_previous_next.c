@@ -1,14 +1,7 @@
-/*
-Copyright (C) 2017 Interview Druid, Parineeth M. R.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
 
 #include <stdio.h>
 #include <stdlib.h>
-
 
 
 #define MAX_NUM_NODES_IN_TREE (10)
@@ -23,10 +16,8 @@ void handle_error(void)
 struct node
 {
     int data;
-
     struct node *left;
     struct node *right;
-
     struct node *parent;
 
 };
@@ -120,12 +111,12 @@ struct node* get_previous(struct node *x)
 }
 
 
-
-
-
 /*
 x: node in the binary search tree
 Return value: the node after node x
+note the following codes can also be 
+for deleting a node in a binary search tree. 
+The node to be deleted is x.
 */
 struct node* get_next(struct node *x)
 {
@@ -207,8 +198,8 @@ void verify_previous_next(struct node *cur_node, int num_elems)
 }
 
 
-
-int main()
+// main code harness:
+int main(int argc, char *argv[])
 {
     struct node *root1;
     int i, num_elems, number_array[MAX_NUM_NODES_IN_TREE];
@@ -235,8 +226,6 @@ int main()
 
     }
 
-
     printf("Test passed\n");
-
     return 0;
 }

@@ -176,7 +176,9 @@ class LinkedList {
         }
 };
 
-int main() {
+
+// main code harness:
+int main(int argc, char** argv) {
 	LinkedList<int> l;
 	l.InsertFront(1);
 	l.InsertFront(2);

@@ -11,21 +11,17 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 #include <stack>
 
 using namespace std;
-
 #define MAX_NUM_NODES_IN_TREE (10)
-
 #define MAX_NODE_VALUE (10)
 
 
 struct node
 {
     int data;
-
     int depth;
 
     struct node *left;
     struct node *right;
-
     struct node *parent;
 
 };
@@ -35,8 +31,6 @@ Include the header file for printing the tree. The header file should be include
 only after defining struct node
 */
 #include "print_tree.h"
-
-
 
 
 /*Recursively Construct a Binary Search Tree from the input array sorted in ascending order*/
@@ -163,10 +157,6 @@ void print_zig_zag(struct node *root, stack<struct node*>& s0,
 
 
 
-
-
-
-
 void test_01()
 {
     struct node *root;
@@ -200,12 +190,11 @@ void test_01()
 }
 
 
-int main()
+// main code harness:
+int main(int argc, char *argv[])
 {
 
     test_01();
-
     printf("Test passed\n");
-
     return 0;
 }

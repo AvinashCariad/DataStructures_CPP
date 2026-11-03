@@ -22,8 +22,6 @@ void handle_error(void)
 
 
 
-
-
 /* 
 n1: head of the first linked list
 n2: head of the second linked list
@@ -208,8 +206,8 @@ int test_merge_sort()
     return 0;
 }
 
-
-int main()
+// main code harness:
+int main(int argc, char** argv)
 {
     int num_loops;
 

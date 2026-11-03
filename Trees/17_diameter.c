@@ -1,10 +1,4 @@
-/*
-Copyright (C) 2017 Interview Druid, Parineeth M. R.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,7 +16,6 @@ struct node
 
     struct node *left;
     struct node *right;
-
     struct node *parent;
 
     struct node *next;
@@ -34,9 +27,6 @@ Include the header file for printing the tree. The header file should be include
 only after defining struct node
 */
 #include "print_tree.h"
-
-
-
 
 
 struct node * construct_bst (struct node *parent, int values[], int low, int high)
@@ -133,8 +123,6 @@ void find_diameter(struct node *cur_node, int *height, int *diameter)
 
 
 
-
-
 void test()
 {
     struct node *root;
@@ -169,11 +157,10 @@ void test()
 }
 
 
-int main()
+// main code harness:
+int main(int argc, char *argv[])
 {
     test();
-
     printf("Test passed \n");
-
     return 0;
 }

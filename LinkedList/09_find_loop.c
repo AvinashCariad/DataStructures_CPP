@@ -1,10 +1,3 @@
-/*
-Copyright (C) 2017 Interview Druid, Parineeth M. R.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,8 +31,8 @@ struct node* find_loop( struct node *head)
     while (n1 != NULL) {
         n1 = n1->next;
         if (n1) {
-            n1 = n1->next;
-            n2 = n2->next;
+            n1 = n1->next;     // fast pointer moves two steps
+            n2 = n2->next;     // slow pointer moves one step
         }
 
         /*If n1 and n2 meet then there is a loop in the linked list*/
@@ -168,12 +161,11 @@ void test_01()
 }
 
 
-
-int main()
+// main code harness:
+int main(int argc, char** argv)
 {
     
     test_01();
-
     printf("Test passed\n");
     return 0;
 }

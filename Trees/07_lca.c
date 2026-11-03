@@ -22,12 +22,9 @@ void handle_error(void)
 struct node
 {
     int data;
-
     int depth;
-
     struct node *left;
     struct node *right;
-
     struct node *parent;
 
 };
@@ -165,7 +162,8 @@ struct node *lca(struct node *n1, struct node *n2)
 }
 
 
-int main()
+// main code harness:
+int main(int argc, char *argv[])
 {
     struct node *root, *lca1, *lca2;
     int i, j, num_elems, number_array[MAX_NUM_NODES_IN_TREE];

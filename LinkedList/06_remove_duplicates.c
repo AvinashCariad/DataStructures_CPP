@@ -52,7 +52,6 @@ void remove_duplicates(struct node *head)
 }
 
 
-
 struct node* construct_list(int num_elements)
 {
     int i;
@@ -116,8 +115,8 @@ void verify_list(struct node *head)
 
 }
 
-
-int main()
+// main code harness:
+int main(int argc, char** argv)
 {
     struct node *head;
     int num_elems;

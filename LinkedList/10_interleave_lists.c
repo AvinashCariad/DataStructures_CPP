@@ -6,7 +6,6 @@
 #define MAX_NUM_ELEMENTS (10)
 #define MAX_NUM_LOOPS   (10)
 
-
 struct node
 {
     int data;
@@ -18,8 +17,6 @@ void handle_error(void)
     printf("Test failed\n");
     exit(1);
 }
-
-
 
 
 /* 
@@ -175,13 +172,12 @@ int test_interleave()
     return 0;
 }
 
-
-int main()
+// main code harness:
+int main(int argc, char** argv)
 {
     int num_loops;
 
     for (num_loops = 0; num_loops < MAX_NUM_LOOPS; ++num_loops) {
-
             test_interleave();
     }
 

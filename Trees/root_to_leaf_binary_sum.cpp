@@ -22,7 +22,6 @@ template<typename T>
 struct Node {
     T data;
     unique_ptr<Node<T>> left, right;
-    
     Node(T data) : data(data), left(nullptr), right(nullptr) {}
 };
 
@@ -58,7 +57,10 @@ void postOrderTraversal(const unique_ptr<Node<T>>& root) {
     }
 }
 
-int main() {
+
+
+// main code harness 
+int main(int argc, char *argv[]) {
     /*
                     1
                   /   \

@@ -1,10 +1,3 @@
-/*
-Copyright (C) 2017 Interview Druid, Parineeth M. R.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,7 +19,6 @@ struct node
 
     struct node *left;
     struct node *right;
-
     struct node *parent;
 
 };
@@ -102,8 +94,8 @@ void print_right_view(struct node *cur_node, int cur_level, int *max_level) {
     print_right_view(cur_node->left, cur_level + 1, max_level);
 }
 
-
-int main()
+// main code harness:
+int main(int argc, char *argv[])
 {
     struct node *root1;
     int i, num_elems, number_array[MAX_NUM_NODES_IN_TREE];

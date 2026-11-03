@@ -1,10 +1,3 @@
-/*
-Copyright (C) 2017 Interview Druid, Parineeth M. R.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,13 +18,15 @@ void check_condition(int condition)
 }
 
 
+
+// definition of the node structure
+// for the binary search tree
 struct node
 {
     int data;
 
     struct node *left;
     struct node *right;
-
     struct node *parent;
 
 };
@@ -150,8 +145,6 @@ struct node* get_next(struct node *x)
 }
 
 
-
-
 /*
 root: the root of the binary search tree
 k: sum of two nodes should equal k
@@ -187,7 +180,7 @@ void find_pair_sum_to_k(struct node *root, int k, struct node **result1,
         if (sum == k) {
             *result1 = n1;
             *result2 = n2;
-            break;
+            break;        // possible pair found, exit the loop
         }
 
         if (sum < k) {
@@ -222,7 +215,9 @@ void find_array_sum_to_k(int number_array[], int num_elems, int K, int *val1, in
     }
 }
 
-int main()
+
+// main code harness:
+int main(int argc, char *argv[])
 {
     struct node *root1, *n1, *n2;
     int K;

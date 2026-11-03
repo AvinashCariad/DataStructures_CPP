@@ -28,8 +28,6 @@ static void print_list(struct node* head)
 }
 
 
-
-
 struct node* construct_list(int num_elements)
 {
     int i;
@@ -204,12 +202,8 @@ struct node* swap_kth_node(struct node *head, int k, int length)  {
 }
 
 
-
-
-
-
-
-int main()
+// main code harness:
+int main(int argc, char** argv)
 {
     struct node *head  ;
     struct node *k_node;

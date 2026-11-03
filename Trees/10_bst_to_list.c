@@ -17,7 +17,6 @@ struct node
 
     struct node *left;
     struct node *right;
-
     struct node *parent;
 
 };
@@ -163,8 +162,8 @@ static void print_list(struct node* head)
     printf("\n\n");
 }
 
-
-int main()
+// main code harness:
+int main(int argc, char *argv[])
 {
     struct node *root, *head, *prev;
     int i, num_elems, number_array[MAX_NUM_NODES_IN_TREE];

@@ -20,8 +20,6 @@ struct node
 };
 
 
-
-
 // reverse list:
 struct node* reverse_linked_list(struct node *head)
 {
@@ -110,8 +108,6 @@ struct node* multiply_lists(struct node *n1, struct node *n2, int count1,
 }
 
 
-
-
 struct node* construct_list(int num_elements)
 {
     int i;
@@ -167,7 +163,6 @@ int convert_list_to_value(struct node *head)
     return result;
 }
 
-
 // main code harness:
 int main(int argc, char** argv)
 {
@@ -202,7 +197,6 @@ int main(int argc, char** argv)
         if (val3 != (val1 * val2)) {
             handle_error();
         }
-
 
         delete_list(head1);
         delete_list(head2);

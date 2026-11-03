@@ -171,8 +171,8 @@ void test(const char *str, int expected_result)
     printf("______________________________________\n");
 }
 
-
-int main()
+// main code harness:
+int main(int argc, char** argv)
 {
     test("a", 1);
     test("abba", 1);

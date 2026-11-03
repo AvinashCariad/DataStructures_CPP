@@ -1,10 +1,4 @@
-/*
-Copyright (C) 2017 Interview Druid, Parineeth M. R.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,7 +14,6 @@ struct node
 
     struct node *left;
     struct node *right;
-
     struct node *parent;
 
 };
@@ -155,10 +148,8 @@ int is_bst(struct node *cur_node, struct node ** prev_node_pp)
 }
 
 
-
-
-
-int main()
+// main code harness:
+int main(int argc, char *argv[])
 {
     struct node *root;
     int i, num_elems, number_array[MAX_NUM_NODES_IN_TREE];
@@ -209,8 +200,6 @@ int main()
         printf("______________________________________________________\n");
 
     }
-
-
 
     printf("Test passed\n");
 

@@ -1,10 +1,4 @@
-/*
-Copyright (C) 2017 Interview Druid, Parineeth M. R.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,7 +18,6 @@ struct node
 
     struct node *left;
     struct node *right;
-
     struct node *parent;
 
 };
@@ -128,8 +121,8 @@ static void print_list(struct node* head)
     printf("\n\n");
 }
 
-
-int main()
+// main code harness:
+int main(int argc, char *argv[])
 {
     struct node *root, *new_node, *iter_node, *prev, *head;
     int i, num_elems, result;

@@ -95,8 +95,8 @@ void print_list(struct node* head)
     printf("\n");
 }
 
-
-int main()
+// main code harness:
+int main(int argc, char** argv)
 {
     struct node *head, *cur_node;
     int num_elems, i, k, ret_val;

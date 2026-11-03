@@ -9,14 +9,10 @@
 struct node
 {
     int data;
-
     int depth;
-
     struct node *left;
     struct node *right;
-
     struct node *parent;
-
     struct node *next;
 
 };
@@ -98,13 +94,11 @@ void swap_children(struct node *cur_node)
 
 }
 
-
-
 /*cur_node: current node whose left and right sub-trees need to be checked
 prev_node_pp: the in-order predecessor of cur_node
 Return value: 1 if the tree is a binary search tree, 0 otherwise
 */
-int is_bst(struct node *cur_node, struct node ** prev_node_pp)
+int is_bst(struct node *cur_node, struct node ** prev_node_pp)    // note the double pointer for prev_node_pp
 {
     if (!cur_node)
         return 1;
@@ -134,8 +128,8 @@ void print_result(int result)
 }
 
 
-
-int main()
+// main code harness:
+int main(int argc, char *argv[])
 {
     struct node *root;
     int i, num_elems, number_array[MAX_NUM_NODES_IN_TREE];
@@ -182,7 +176,6 @@ int main()
         printf("_____________________________________________________\n");
 
     }
-
 
 
     printf("Test passed\n");

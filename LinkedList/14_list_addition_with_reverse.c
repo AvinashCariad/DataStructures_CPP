@@ -50,8 +50,6 @@ struct node* reverse_linked_list(struct node *head)
 }
 
 
-
-
 /*
 n1: head of the first linked list 
 n2: head of the second linked list
@@ -176,7 +174,9 @@ int convert_list_to_value(struct node *head)
     return result;
 }
 
-int main()
+
+// main code harness:
+int main(int argc, char** argv)
 {
 
     struct node *head1, *head2, *result;

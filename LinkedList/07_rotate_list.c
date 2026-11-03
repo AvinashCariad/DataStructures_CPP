@@ -124,6 +124,7 @@ struct node* rotate_list(struct node *head, int k, int length)
 
     /*Make the last node point to head and the node previous to pivot
     point to NULL*/
+    // Make the last node point to head and the node previous to pivot point to NULL
     last->next = head;
     prev->next = NULL;
 
@@ -233,7 +234,9 @@ void test5()
     delete_list(head);      
 }
 
-int main()
+
+// main code harness:
+int main(int argc, char** argv)
 {
     test1();
     test2();

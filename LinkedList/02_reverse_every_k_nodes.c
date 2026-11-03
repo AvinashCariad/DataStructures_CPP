@@ -24,9 +24,6 @@ void handle_error(void)
     exit(1);
 }
 
-
-
-
 /* 
 head: the first node of the linked list
 k: how many nodes should be reversed
@@ -46,7 +43,7 @@ struct node * k_reverse_list(struct node *head, int k)
     while (cur_node && i < k) {
         /*Store the next node in a temporary variable*/
         temp_node = cur_node->next;
-
+        
         /*Reverse the link */
         cur_node->next = prev_node;
 
@@ -73,8 +70,6 @@ struct node * k_reverse_list(struct node *head, int k)
 }
 
 
-
-
 void print_list(struct node *head)
 {
     struct node *cur_node = head;
@@ -96,7 +91,8 @@ void destroy_list(struct node* head)
     }
 }
 
-
+// construct a linked list having num_elements. 
+// The data in the nodes will be from num_elements to 1
 struct node* construct_list(int num_elements)
 {
     int i;
@@ -116,7 +112,6 @@ struct node* construct_list(int num_elements)
 
     return head;
 }
-
 
 
 void test_01()
@@ -158,12 +153,9 @@ void test_01()
     printf("Test passed\n");
 }
 
-
-
-
-int main()
+// main code harness:
+int main(int argc, char** argv)
 {
     test_01();
-
     return 0;
 }

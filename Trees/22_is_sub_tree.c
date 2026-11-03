@@ -1,10 +1,3 @@
-/*
-Copyright (C) 2017 Interview Druid, Parineeth M. R.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,9 +18,7 @@ struct node
 
 };
 
-
-
-
+// construct a binary search tree from the input array sorted in ascending order
 struct node * construct_tree (struct node *parent, int values[], int low, int high)
 {
     int middle;
@@ -62,6 +53,7 @@ struct node * construct_tree (struct node *parent, int values[], int low, int hi
 
 }
 
+// destroy the binary search tree
 void destroy_tree(struct node *cur_node) 
 {
     if (!cur_node)
@@ -74,6 +66,7 @@ void destroy_tree(struct node *cur_node)
 }
 
 
+// handle error by printing the message and exiting the program
 void handle_error()
 {
     printf("Error occured\n");
@@ -100,11 +93,10 @@ int compare_nodes(struct node *n1, struct node *n2)
         && compare_nodes(n1->right, n2->right));
 }
 
-/*Main function that checks if tree under root2 is a subtree of tree under root1
-root1: main tree node
-root2: root of the sub-tree being searched
-Return value: 1 if tree under root2 is present in tree under root1, 0 otherwise
-*/
+//Main function that checks if tree under root2 is a subtree of tree under root1
+//root1: main tree node
+//root2: root of the sub-tree being searched
+//Return value: 1 if tree under root2 is present in tree under root1, 0 otherwise
 int is_sub_tree(struct node *root1, struct node *root2)
 {
     /*empty tree is treated as a sub-tree of the main tree*/
@@ -124,8 +116,8 @@ int is_sub_tree(struct node *root1, struct node *root2)
 } 
 
 
-
-int main()
+// main code harness:
+int main(int argc, char *argv[])
 {
     struct node *sub_tree_root, *main_tree_root;
     int i, num_elems, number_array[MAX_NUM_NODES_IN_TREE];
@@ -181,8 +173,6 @@ int main()
         destroy_tree(sub_tree_root);
 
     }
-
-
 
     printf("Test passed\n");
 

@@ -1,10 +1,4 @@
-/*
-Copyright (C) 2017 Interview Druid, Parineeth M. R.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -139,7 +133,8 @@ void verify_sum (struct node *cur_node, int *sum_array, int* index_p)
 }
 
 
-int main()
+// main code harness:
+int main(int argc, char *argv[])
 {
     struct node *root;
     int i, num_elems, number_array[MAX_NUM_NODES_IN_TREE], sum_array[MAX_NUM_NODES_IN_TREE];

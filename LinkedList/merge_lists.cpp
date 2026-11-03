@@ -74,7 +74,7 @@ Node* mergeSortedLists(Node* head1, Node* head2) {
     }
 
     // Append whichever list still has elements remaining
-    rear->next = head1 ? head1 : head2;
+    rear->next = head1 ? head1 : head2;    // note: if one of the lists is empty, this will append the non-empty list
 
     // The actual head is the node following the dummy node
     return dummy.next;

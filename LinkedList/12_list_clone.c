@@ -34,12 +34,11 @@ struct node* clone_list(struct node *original_head)
     while (n1) {
         next_node = n1->next;
 
-        n2 = (struct node*) malloc(sizeof(struct node*));
+        n2 = (struct node*) malloc(sizeof(struct node));    
         if (!n2) {
                 return NULL;
         }
         n2->data = n1->data;
-
         if (!new_head) 
             new_head = n2;
         n1->next = n2;
@@ -67,8 +66,6 @@ struct node* clone_list(struct node *original_head)
     }
     return new_head;
 }
-
-
 
 
 struct node* construct_list(int num_elements)
@@ -113,8 +110,8 @@ void delete_list(struct node *head)
     }
 }
 
-
-int main()
+// main code harness:
+int main(int argc, char** argv)
 {
     struct node *head, *clone  ;
     struct node *n1, *n2;

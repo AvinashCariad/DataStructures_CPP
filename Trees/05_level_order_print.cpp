@@ -1,10 +1,3 @@
-/*
-Copyright (C) 2017 Interview Druid, Parineeth M. R.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
 
 #include <stdlib.h>
 #include <iostream>
@@ -18,10 +11,8 @@ using namespace std;
 struct node
 {
     int data;
-
     struct node *left;
     struct node *right;
-
     struct node *parent;
 };
 
@@ -32,17 +23,11 @@ only after defining struct node
 #include "print_tree.h"
 
 
-
-
 void handle_error(void)
 {
     cout << "Test failed\n";
     exit(1);
 }
-
-
-
-
 
 
 /*Recursively Construct a Binary Search Tree from the input array sorted in ascending order*/
@@ -95,8 +80,6 @@ void print_data(int data)
 }
 
 
-
-
 /*
 root: root node of the tree 
 q: queue that helps in printing in level order
@@ -147,8 +130,8 @@ void print_level_order(struct node *root, queue<struct node*>& q)
 }
 
 
-
-int main()
+// main code harness:
+int main(int argc, char *argv[])
 {
     struct node *root;
     queue<struct node*> q;
