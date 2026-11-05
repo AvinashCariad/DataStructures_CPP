@@ -148,8 +148,8 @@ void test(const string& str1, bool expected_result)
     cout << "________________________________________\n";
 }
 
-
-int main()
+// main code harness:
+int main(int argc, char *argv[])
 {
     test("iwilli", true);
     test("iwillplaynow", true);

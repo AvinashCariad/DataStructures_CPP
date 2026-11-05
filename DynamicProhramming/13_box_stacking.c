@@ -1,11 +1,3 @@
-/*
-Copyright (C) 2017 Interview Druid, Parineeth M. R.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -26,8 +18,6 @@ int min(int a, int b)
 {
     return a < b ? a : b;
 }
-
-
 
 struct Box
 {
@@ -90,6 +80,7 @@ int max_stack_height(struct Box a[], int num_input_boxes) {
         best_height[i] = boxes[i].height;
     }
 
+    // Iterate through all boxes and find the best height for each box
     for (i = 1; i < num_boxes; ++i) {
         for (j = 0; j < i; ++j) {
             /*We can place box i on box j, only if base of box i 
@@ -126,7 +117,6 @@ void test_01()
     int result;
     
     result = max_stack_height(a, n);
-
     printf("Max stack height = %d \n", result);
 
     if (result != 600)
@@ -141,14 +131,13 @@ void test_02()
     int result;
     
     result = max_stack_height(a, n);
-
     printf("Max stack height = %d \n", result);
 
 }
 
 
-
-int main()
+// main code harness:
+int main(int argc, char *argv[])
 {
     test_01();
     test_02();
