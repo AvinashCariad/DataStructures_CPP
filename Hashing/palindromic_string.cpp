@@ -43,7 +43,10 @@ bool canBeMadePalindromic(string& word){
 	return true;
 }
 
-int main() {
+
+
+// main code harness:
+int main(int argc, char** argv) {
 	string word = "aabbcd";
 	
 	cout << canBeMadePalindromic(word);

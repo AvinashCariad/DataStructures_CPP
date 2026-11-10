@@ -20,66 +20,60 @@
         Total: O(n * 2^n)
 */
 
-#include<iostream>
-#include<string>
-#include<algorithm>
-#include<vector>
-using namespace std;
 
-//displays the series
-void displaySeries(vector<string>& series){
-    for(string term: series)
-        cout << term << endl;
-    cout << endl;
+#include <iostream>
+#include <string_view>
+#include <cctype>
+#include <cstdlib>
+
+
+
+// Terminate the program cleanly with a failure message
+void handle_error() {
+    std::cerr << "Test failed\n";
+    std::exit(EXIT_FAILURE);
 }
 
-// for some weird reason the library function was not working
-string to_string(int n){
-    string term;
-    while(n){
-        term += n%10 + '0';
-        n /= 10;
-    }
-    reverse(term.begin(), term.end());
-    return term;
-}
+/*
+ * Counts the number of alphabetical words in a string.
+ * A new word is detected whenever a non-alphabet character transitions to an alphabet character.
+ */
+int count_words(std::string_view str) {
+    int num_words = 0;
+    bool is_prev_char_alphabet = false;
 
-// finds the term using the previous term
-string lookAndSayTerm(string prev_term){
-    // scan for consecutive same digits and keep their counts
-    int count_digit = 1;
-    string term;
+    for (const char c : str) {
+        // Use standard library check for alphabetical characters (cast to unsigned char safely)
+        bool is_cur_char_alphabet = std::isalpha(static_cast<unsigned char>(c));
 
-    for(int i = 0; i < prev_term.size(); i++){
-        // if the current char is different from previous
-        // then write the char with its count
-        while( i+1 < prev_term.size() && prev_term[i] == prev_term[i+1]){
-            ++count_digit;
-            ++i;
+        if (!is_prev_char_alphabet && is_cur_char_alphabet) {
+            ++num_words;
         }
-        term += to_string(count_digit) + prev_term[i];
-        count_digit = 1;
+
+        is_prev_char_alphabet = is_cur_char_alphabet;
     }
-    return term;
+
+    return num_words;
 }
 
-// finds the nth term in look and say series
-string nthLookSayTerm(int n){
-    // to store the series
-    vector<string> series;
-    // first term
-    series.push_back("1");
+// Test harness to validate results
+void test(std::string_view str, int expected_result) {
+    int result = count_words(str);
 
-    for(int i = 1; i< n; i++){
-        // finds the term using the previous term
-        series.push_back(lookAndSayTerm(series.back()));
+    if (result != expected_result) {
+        handle_error();
     }
-    displaySeries(series);
-    cout << endl;
-    return series.back();
+
+    std::cout << "Word count = " << result << ", for string: \"" << str << "\"\n";
 }
 
-int main(){
-    cout << nthLookSayTerm(7);
-    return 0;
+
+// main code harness:
+int main(int argc, char** argv) {
+    test("hello", 1);
+    test("", 0);
+    test("   hello,how are    you doing?", 5);
+
+    std::cout << "Test passed\n";
+    return EXIT_SUCCESS;
 }

@@ -63,7 +63,9 @@ vector<string> findMnemonicsDriver(const string& phone_num){
     return mnemonics;
 }
 
-int main(){
+
+// main code harness:
+int main(int argc, char** argv){
     vector<string> mnemonics= findMnemonicsDriver("123");
     printMnemonics(mnemonics);
     return 0;

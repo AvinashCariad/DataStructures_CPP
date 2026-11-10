@@ -33,12 +33,6 @@
 #include <queue>
 using namespace std;
 
-// Comparator for sort
-struct Comp{
-	bool operator()(const pair<string, int> a, const pair<string, int> b) {
-		return a.second > b.second;
-	}
-};
 
 // Solution 1
 // TC: O(n + mlogm)
@@ -50,15 +44,22 @@ vector<pair<string, int>> kFrequentWords(vector<string>& arr, int k) {
 		++freq_c[word];
 	}
 	
-	vector<pair<string, int>> freq(freq_c.begin(), freq_c.end()); 
+	vector<pair<string, int>>freq(freq_c.begin(), freq_c.end()); 
 	// sort the words by frequency - note the second is being used for sorting, also note the lambda function:
 	sort(freq.begin(), freq.end(), [](const pair<string, int> a, const pair<string, int> b)-> bool {
 		return a.second > b.second;
 	});
 	
-
-	return vector<pair<string, int>>(freq.begin(), freq.begin() + k);       
+	return vector<pair<string, int>>(freq.begin(), freq.begin() + k);              // return the first k elements       
 }
+
+
+// Comparator for sort
+struct Comp{
+	bool operator()(const pair<string, int> a, const pair<string, int> b) {
+		return a.second > b.second;
+	}
+};
 
 
 // Solution 2
@@ -69,6 +70,7 @@ vector<pair<string, int>> kFrequentWordsPQueue(vector<string>& arr, int k) {
 		++char_freq[word];
 	
 	vector<pair<string, int>> freq(char_freq.begin(), char_freq.end());
+	// Define the priority queue with the custom comparator:
 	priority_queue<pair<string, int>, vector<pair<string, int>>, Comp> pq;         // note how the struct is being passed as a comparator
 
 	// add it to the priority queue
@@ -90,7 +92,6 @@ vector<pair<string, int>> kFrequentWordsPQueue(vector<string>& arr, int k) {
 	return k_freq;
 	
 }
-
 
 // main code harness:
 int main(int argc, char** argv) {

@@ -7,7 +7,6 @@ using namespace std;
 // Large value to represent infinity for unreachable paths
 const int INF = 1e9;
 
-
 // main code harness:
 int main(int argc, char *argv[]) {
     // Example: Adjacency matrix representation of a graph with 4 cities

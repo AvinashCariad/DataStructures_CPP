@@ -31,7 +31,7 @@ int function_atoi(const char * str)
 
     while (i < length ) {
         if (str[i] >= '0' && str[i] <= '9') {
-            val = (val * 10) + (str[i] - '0');
+            val = (val * 10) + (str[i] - '0');       // convert char to int
         }
         else {
             break;
@@ -55,7 +55,9 @@ void test(char *str1, int expected_result)
         handle_error();
 }
 
-int main()
+
+// main code harness:
+int main(int argc, char** argv)
 {
     test("-47", -47);
     test("987", 987);

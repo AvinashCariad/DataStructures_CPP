@@ -4,7 +4,7 @@
 Helper function to print number from 1 to 999
 number: number from 1 to 999
 */
-void print_3_digits(int number)
+void print_3_digits(int number)       // note print 3_digits is a helper function to print numbers from 1 to 999
 {
     int hundreds_digit, tens_digit, unit_digit, remainder;
 

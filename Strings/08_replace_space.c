@@ -69,13 +69,8 @@ void test(char str1[], char expected_result[])
 
 
 
-
-
-
-
-
-
-int main()
+// main code harness:
+int main(int argc, char** argv)
 {
     char str1[MAX_STRING_LENGTH];
 

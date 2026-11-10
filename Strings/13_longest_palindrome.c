@@ -12,7 +12,6 @@ void handle_error(void)
 }
 
 
-
 /*str1: non-NULL input character string
 Return value: length of longest palindrome
 */
@@ -76,7 +75,9 @@ void test_01(char *str1, int expected_result)
         handle_error();
 }
 
-int main()
+
+// main code harness:
+int main(int argc, char** argv)
 {
 
     test_01("RACECAR", 7);

@@ -60,7 +60,9 @@ char* replaceAndRemove(char str[], int n){
     return str;
 }
 
-int main(){
+
+// main code harness:
+int main(int argc, char** argv){
     char str[] = "aaa";
 
     cout << replaceAndRemove(str, 3) << endl;

@@ -150,9 +150,6 @@ void print_nesting(char *str1, int pos, int n_max, int n_open, int n_close) {
 
 
 
-
-
-
 void test_01()
 
 {
@@ -168,7 +165,8 @@ void test_01()
 }
 
 
-int main()
+// main code harness:
+int main(int argc, char** argv)
 {
     test_01();
 

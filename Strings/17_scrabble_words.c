@@ -1,10 +1,6 @@
-
-
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
-
-
 
 
 /*
@@ -41,9 +37,6 @@ void generate_words(char *str, char *buf, unsigned int pos,
 
 
 
-
-
-
 void test(char *str)
 {
     unsigned int length = strlen(str);
@@ -62,7 +55,9 @@ void test(char *str)
 }
 
 
-int main()
+
+// main code harness:
+int main(int argc, char** argv)
 {
     test("");
     test("A");

@@ -13,7 +13,6 @@ void handle_error(void)
 }
 
 
-
 /*Returns 1 if there is at least one permutation of string str1 which is a  
     palindrome, 0 otherwise*/
 int is_permutation_palindrome(char str1[])
@@ -50,9 +49,7 @@ int is_permutation_palindrome(char str1[])
 void test(char str1[], int expected_result)
 {
     int result;
-
     result = is_permutation_palindrome(str1);
-
     if (result)
         printf("Permutation of %s is a palindrome\n", str1);
     else
@@ -63,7 +60,8 @@ void test(char str1[], int expected_result)
 }
 
 
-int main()
+// main code harness:
+int main(int argc, char** argv)
 {
     test("elelv", 1); /*palindrome is level*/
     test("ab", 0);

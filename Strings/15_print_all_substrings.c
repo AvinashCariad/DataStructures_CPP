@@ -29,8 +29,8 @@ void print_all_sub_strings(char *str1)
 
 
 
-
-int main()
+// test harness to validate results:
+int main(int argc, char** argv)
 {
     print_all_sub_strings("ABCDE");
 

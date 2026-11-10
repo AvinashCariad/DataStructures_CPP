@@ -54,7 +54,8 @@ string shortestRomanfromInt(int num){
     }
 }
 
-int main(){
+// main code harness:
+int main(int argc, char** argv){
    cout << shortestRomanfromInt(10) << endl << shortestRomanfromInt(59) << endl
       << shortestRomanfromInt(900) << endl << shortestRomanfromInt(1300) << endl;
     return 0;

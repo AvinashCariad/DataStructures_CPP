@@ -1,11 +1,6 @@
-
-
-#include "stdio.h"
-#include "stdlib.h"
-#include "string.h"
-
-
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /*
 str1: valid input string whose permutations have to be formed
@@ -21,48 +16,60 @@ void generate_permutations(char *str1, char *buf, unsigned int pos,
 
     /*Recursion termination condition*/
     if (pos == length) {
-        buf[pos] = 0;
+        buf[pos] = '\0';
         printf("%s\n", buf);
-        return ;
+        return;
     }
 
     for (i = 0; i < length; ++i) {
         if (visited[i] == 0) {
             buf[pos] = str1[i];
             visited[i] = 1;
-            generate_permutations(str1, buf, pos+1, visited, length);
-            visited[i] = 0;
+            generate_permutations(str1, buf, pos + 1, visited, length);
+            visited[i] = 0;         // backtrack to explore other permutations
         }
     }
 }
-
-
-
-
-
-
 
 void test(char *str1)
 {
     unsigned int length = strlen(str1);
 
+    printf("Input: %s\n", str1);
+
+    /* Early return guard to prevent implementation-defined calloc(0) behavior */
+    if (length == 0) {
+        printf("\n");
+        printf("______________________________\n\n");
+        return;
+    }
+
+
+    // 
     char *buf = (char*) malloc(length + 1);
+    if (buf == NULL) {
+        fprintf(stderr, "Memory allocation failed for buf\n");
+        exit(1);
+    }
 
     int *visited = (int*) calloc(length, sizeof(int));
-
-    printf("Input: %s\n", str1);
+    if (visited == NULL) {
+        fprintf(stderr, "Memory allocation failed for visited array\n");
+        free(buf);
+        exit(1);
+    }
 
     generate_permutations(str1, buf, 0, visited, length);
 
     free(visited);
-
     free(buf);
 
     printf("______________________________\n\n");
 }
 
 
-int main()
+// main code harness:
+int main(int argc, char** argv)
 {
     test("");
     test("A");
@@ -71,6 +78,3 @@ int main()
     printf("Test passed\n");
     return 0;
 }
-
-
-

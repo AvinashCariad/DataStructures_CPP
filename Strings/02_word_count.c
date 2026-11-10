@@ -69,7 +69,9 @@ void test(char *str1, int expected_result)
 }
 
 
-int main()
+
+// main code harness:
+int main(int argc, char** argv)
 {
     int expected_word_count;
 

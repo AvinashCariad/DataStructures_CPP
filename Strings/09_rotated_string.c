@@ -1,10 +1,3 @@
-/*
-Copyright (C) 2017 Interview Druid, Parineeth M. R.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -76,7 +69,9 @@ void test(char *str1, char *str2, int expected_result)
 }
 
 
-int main()
+
+// main code harness:
+int main(int argc, char** argv)
 {
 
     test("ABCDE", "CDEAB", 1);

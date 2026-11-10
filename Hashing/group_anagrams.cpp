@@ -90,12 +90,6 @@ int main(int argc, char** argv)
 
 
 
-
-
-
-
-
-
 /*
 // groups anagrams in groups
 unordered_map<string, vector<string>> groupAnagrams(const vector<string>& arr) {
@@ -150,5 +144,77 @@ int main(int argc, char** argv) {
 	
 	return 0;
 }
+
+*/
+
+
+
+/*
+
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+
+unordered_map<string, vector<string>> groupAnagrams(const vector<string>& arr)
+{
+    unordered_map<string, vector<string>> anagrams;
+
+    // Build groups
+    for (const string& word : arr)
+    {
+        string sorted_word = word;
+        sort(sorted_word.begin(), sorted_word.end());       // note this
+        anagrams[sorted_word].push_back(word);
+    }
+
+    // Clean up groups with only 1 word using a lambda function
+    // (C++20 std::erase_if makes this incredibly clean)
+    erase_if(anagrams, [](const auto& item) {
+        return item.second.size() < 2; 
+    });
+
+    return anagrams;
+}
+
+int main(int argc, char** argv)
+{
+    vector<string> arr = {
+        "dog",
+        "god",
+        "kite",
+        "debitcard",
+        "badcredit"
+    };
+
+    auto groups = groupAnagrams(arr);
+
+    // Lambda function to print the map contents
+    auto printAnagramGroups = [](const unordered_map<string, vector<string>>& groups) {
+        for (const auto& [key, word_list] : groups) // Using structured binding (C++17)
+        {
+            for (const string& word : word_list)
+            {
+                cout << word << " ";
+            }
+            cout << '\n';
+        }
+    };
+
+    printAnagramGroups(groups);
+
+    return 0;
+}
+
+
+
+
+
+
+
+
 
 */

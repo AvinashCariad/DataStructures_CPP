@@ -68,7 +68,9 @@ string convertBasesDriver(const string& num_b1, int b1, int b2){
     return num_b2;
 }
 
-int main(){
+
+// main code harness:
+int main(int argc, char** argv){
     // testing
     cout << convertToDecimal("1001", 2) << endl;
     cout << convertToBase(15, 2) << endl << endl;

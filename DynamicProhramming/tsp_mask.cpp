@@ -59,8 +59,7 @@ int tsp(int mask, int pos, int n, const vector<vector<int>>& dist,
     for (int nextCity = 0; nextCity < n; ++nextCity) {
         // If the nextCity has NOT been visited yet
         if ((mask & (1 << nextCity)) == 0) {
-            int newCost = dist[pos][nextCity] + tsp(mask | (1 << nextCity), nextCity, n, dist, memo, parent);
-            
+            int newCost = dist[pos][nextCity] + tsp(mask | (1 << nextCity), nextCity, n, dist, memo, parent);      // recursive: calculate the total cost of moving to nextCity and solving the rest of the tour        
             if (newCost < minCost) {
                 minCost = newCost;
                 bestNextCity = nextCity;
@@ -85,7 +84,7 @@ void printPath(int n, const vector<vector<int>>& parent) {
     cout << "Optimal Path: " << currCity;
 
     // Trace the path forward until all bits are set
-    while (mask != (1 << n) - 1) {
+    while (mask != (1 << n) - 1) {                          // while not all cities have been visited
         int nextCity = parent[mask][currCity];
         cout << " -> " << nextCity;
         

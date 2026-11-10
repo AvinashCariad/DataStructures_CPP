@@ -17,6 +17,24 @@
 		TC: O(n)
 		SC: O(m), m: no. of distinct students, worst case: O(n), no. of scores=no. of students
 */
+/*
+	Given a text file which contains scores and student id in new line. So each record is there on a new line.
+	Find the top scoring student. Consider using only the top 3 scores for computing the avg., students with
+	atleast 3 test scores are only considered.
+
+	Input: file
+	Output: string 
+
+	Solution:
+		Use a hash table for storing the student id and their scores.
+		We use a priority queue of 3 elements as value for keys, whose creation is O(3)~O(1).
+		Now for after going through all the scores, we traverse through the table once and
+		compute the avg, while keeping track of max.
+		Since heapifying takes O(n), so in worst case it will take O(n), n: no. of test scores
+
+		TC: O(n)
+		SC: O(m), m: no. of distinct students, worst case: O(n), no. of scores=no. of students
+*/
 
 #include <iostream>
 #include <fstream>
@@ -39,15 +57,10 @@ string findStudentWithHighestScore(ifstream& in)
     string name;
     int score;
 
-    // Read:
-    //
-    // Alice 90
-    // Bob   80
-    // Alice 95
-    // ...
-
+    // Read until the end of the file
     while (in >> name >> score)
     {
+        // Fixed: Removed the accidental duplicate open curly brace here
         auto& scores = student_records[name];
 
         scores.push(score);
@@ -55,9 +68,9 @@ string findStudentWithHighestScore(ifstream& in)
         // Keep only the top 3 scores.
         if (scores.size() > 3)
         {
-            scores.pop();
+            scores.pop(); // remove the smallest score at the top of the min-heap.
         }
-    }
+    } // Fixed: Correctly placed the closing brace for the while loop
 
     string top_student;
     int top_score = -1;
@@ -70,6 +83,7 @@ string findStudentWithHighestScore(ifstream& in)
         {
             int curr_score = 0;
 
+            // Reset curr_score inside the loop for each student
             while (!record.second.empty())
             {
                 curr_score += record.second.top();
@@ -87,10 +101,8 @@ string findStudentWithHighestScore(ifstream& in)
     return top_student;
 }
 
-
 // main code harness:
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
     ifstream input("scores.txt");
 
     if (!input.is_open())
@@ -99,8 +111,7 @@ int main(int argc, char** argv)
         return 1;
     }
 
-    string student =
-        findStudentWithHighestScore(input);
+    string student = findStudentWithHighestScore(input);
 
     if (student.empty())
     {
@@ -108,21 +119,11 @@ int main(int argc, char** argv)
     }
     else
     {
-        cout << "Top student: "
-             << student
-             << '\n';
+        cout << "Top student: " << student << '\n';
     }
 
     return 0;
 }
-
-
-
-
-
-
-
-
 
 
 

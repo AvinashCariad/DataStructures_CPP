@@ -75,8 +75,6 @@ void hashDelete(LRUCache* cache, int key) {
 }
 
 
-
-
 // ------------------ Doubly Linked List ------------------
 
 void insertNode(int key, int value, Node* start) {

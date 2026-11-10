@@ -109,3 +109,88 @@ int main(int argc, char** argv)
     printf("Test passed\n");
     return 0;
 }
+
+
+
+
+
+/*
+
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <cctype>
+
+// Main function to reverse the words in a string using idiomatic C++
+void reverse_words(std::string& str) {
+    if (str.length() < 2) {
+        return;
+    }
+
+    // 1. Reverse the entire string using built-in C++ standard algorithms
+    std::reverse(str.begin(), str.end());
+
+    // 2. Reverse the individual words back
+    size_t pos = 0;
+    size_t length = str.length();
+
+    while (pos < length) {
+        // Find the start of a word (alphabetic character)
+        if (std::isalpha(static_cast<unsigned char>(str[pos]))) {
+            size_t low = pos;
+            
+            // Scan to find the end of the word
+            while (pos < length && std::isalpha(static_cast<unsigned char>(str[pos]))) {
+                pos++;
+            }
+            size_t high = pos; // standard library ranges are [exclusive) end boundaries
+
+            // Reverse only this word segment
+            std::reverse(str.begin() + low, str.begin() + high);
+        } else {
+            pos++;
+        }
+    }
+}
+
+void handle_error() {
+    std::cerr << "Test failed\n";
+    std::exit(1);
+}
+
+void test(std::string str, const std::string& expected_result) {
+    std::cout << "\"" << str << "\" ";
+
+    reverse_words(str);
+
+    std::cout << "=>  \"" << str << "\"\n";
+
+    if (str != expected_result) {
+        handle_error();
+    }
+}
+
+// main code harness:
+int main(int argc, char** argv) {
+    std::string str1;
+
+    str1 = "";
+    test(str1, "");
+
+    str1 = "a";
+    test(str1, "a");
+
+    str1 = "Hello how are you";
+    test(str1, "you are how Hello");
+
+    std::cout << "Test passed\n";
+    return 0;
+}
+
+
+
+
+
+
+
+*/

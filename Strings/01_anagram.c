@@ -3,6 +3,12 @@
 #include <string.h>
 
 
+/*
+An anagram is a word, phrase, or sentence formed by rearranging the letters of another word,
+phrase, or sentence, using all the original letters exactly once
+*/
+
+
 
 #define NUM_CHARACTERS 256
 
@@ -28,7 +34,7 @@ int are_strings_anagrams( char *str1, char *str2)
     
     /*Compute the character counts for str1 and str2*/
     while (*str1) {
-        count1[(int)*str1]++;
+        count1[(int)*str1]++;           // note the casting here: count([(int)*str])
         str1++;
     }
     
@@ -65,8 +71,8 @@ int are_strings_anagrams( char *str1, char *str2)
     
 }
 
-
-int main()
+// main code harness:
+int main(int argc, char** argv)
 {
     test("ABCDE", "CDBAE", 1);
 
@@ -75,3 +81,8 @@ int main()
     printf("Test passed \n");
     return 0;
 }
+
+
+
+
+
