@@ -24,57 +24,51 @@
 
 #include <iostream>
 #include <vector>
-#include <string>
 #include <queue>
-#include <sstream>
-#include <algorithm>
 #include <functional>
+
 using namespace std;
 
 struct VectorIterator {
-	vector<int>::const_iterator curr;	// for current vector element
-	vector<int>::const_iterator last; // for saving vector end
+    vector<int>::const_iterator curr;
+    vector<int>::const_iterator last;
 
-	bool operator>(const VectorIterator& b) const {
-		return 	*curr > * (b.curr);
-	}
+    bool operator>(const VectorIterator& b) const {
+        return *curr > *(b.curr);
+    }
 };
 
-// merges multiple sorted vector into a single vector
-vector<int> mergeMultipleSortedvectors(vector<vector<int>>& arr) {
-	vector<int> sorted_vector;
-	
-	// min-heap of size equal to num of vectors, here we use lambda function for comparator
-	// we can use greater<> also, since '<' has been overloaded already in structure
-	priority_queue<VectorIterator, vector<VectorIterator>, function<bool(VectorIterator, VectorIterator)>>
-		min_heap([](const VectorIterator& a, const VectorIterator& b)->bool {
-		return *(a.curr) > * (b.curr);
-			});
+vector<int> mergeMultipleSortedvectors(const vector<vector<int>>& arr) {
+    vector<int> sorted_vector;
 
-	// for each vector, we put its first and last iterators, this helps
-	// to keep track of which vector element was popped 
-	for (const vector<int>& a : arr) {
-		min_heap.emplace(VectorIterator{ a.cbegin(), a.cend() });
-	}
+    // Using greater<VectorIterator> avoids std::function overhead
+    priority_queue<VectorIterator, vector<VectorIterator>, greater<VectorIterator>> min_heap;
 
-	// now we keep popping the smallest element from heap untill all the 
-	// vector elements are finished
-	while (!min_heap.empty()) {
-		auto min_el = min_heap.top();
-		// pop the heap min
-		min_heap.pop();
+    // 1. Only push non-empty vectors so curr is always valid
+    for (const vector<int>& a : arr) {
+        if (a.cbegin() != a.cend()) {
+            min_heap.emplace(VectorIterator{ a.cbegin(), a.cend() });
+        }
+    }
 
-		// now push the next element from the vector from
-		// which the element was popped
-		if (min_el.curr != min_el.last) {
-			sorted_vector.emplace_back(*(min_el.curr));
-			min_heap.emplace(VectorIterator{ next(min_el.curr), min_el.last });
-		}
+    // 2. Every item in min_heap is guaranteed to have curr != last
+    while (!min_heap.empty()) {
+        auto min_el = min_heap.top();
+        min_heap.pop();                                                   // popping removes the first and last iterator both
 
-	}
+        sorted_vector.emplace_back(*(min_el.curr));
 
-	return sorted_vector;
+        auto next_it = next(min_el.curr);
+        // Only push back into the heap if more elements remain
+		if (next_it != min_el.last) {
+            min_heap.emplace(VectorIterator{ next_it, min_el.last});       // Because std::priority_queue does not let you modify an element in place. When you pop the smallest item, you remove that vector's "bookmark" from the heap, so you have to insert a new bookmark pointing to the next element in that same vecto
+        }
+    }
+
+    return sorted_vector;
 }
+
+
 
 // sorts increasing decreasing vector elements
 vector<int> sortIncreasingDecreasingElements(vector<int>& arr) {
@@ -117,10 +111,101 @@ ostream& operator<<(ostream& out, vector<T> arr) {
 	return out;
 }
 
-int main() {
+
+// main code harness:
+int main(int argc, char** argv) {
 	vector<int> arr = { -1, 0, 5, 89, 7, 2, 5, 7, 9, 10, -22, 67, 89, 91, 100, 2, 8, 9, 10, 15, 77 };
 
 	auto sorted = sortIncreasingDecreasingElements(arr);
 	cout << sorted;
 	return 0;
 }
+
+
+
+/*
+
+// Another alternative approach:
+// To merge K sorted arrays in C++, use a min-heap (std::priority_queue with std::greater)
+// to repeatedly extract the smallest available element across all arrays in \(O(N \log K)\) time. Here, N is the total number of elements across all arrays and K is the number of arrays.
+
+
+
+#include <iostream>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+// Struct to track the value and its position in the 2D array
+struct Element {
+    int value;
+    int arrayIndex;
+    int elementIndex;
+
+    // Overload '>' so std::priority_queue works as a min-heap
+    bool operator>(const Element& other) const {
+        return value > other.value;
+    }
+};
+
+vector<int> mergeSortedArrays(const vector<vector<int>>& arrays) {
+    priority_queue<Element, vector<Element>, greater<Element>> minHeap;
+    vector<int> result;
+
+    // 1. Push the first element of each non-empty array into the min-heap
+    for (int i = 0; i < (int)arrays.size(); ++i) {
+        if (!arrays[i].empty()) {
+            minHeap.push({arrays[i][0], i, 0});
+        }
+    }
+
+    // 2. Pop the smallest element and push the next element from the same array
+    while (!minHeap.empty()) {
+        Element current = minHeap.top();
+        minHeap.pop();
+
+        result.push_back(current.value);
+
+        int nextIdx = current.elementIndex + 1;
+        if (nextIdx < (int)arrays[current.arrayIndex].size()) {
+            minHeap.push({arrays[current.arrayIndex][nextIdx], current.arrayIndex, nextIdx});
+        }
+    }
+
+    return result;
+}
+
+
+// main code harness:
+int main(int argc, char** argv) {
+    vector<vector<int>> arrays = {
+        {1, 5, 9, 21},
+        {2, 6, 12},
+        {0, 3, 7, 15, 30},
+        {} // Handles empty arrays safely
+    };
+
+    vector<int> merged = mergeSortedArrays(arrays);
+
+    cout << "Merged Array: ";
+    for (int num : merged) {
+        cout << num << " ";
+    }
+    cout << "\n";
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+*/
