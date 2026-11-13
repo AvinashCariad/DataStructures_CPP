@@ -7,20 +7,17 @@
 
 using namespace std;
 
-
-
 void handle_error()
 {
     cout << "Error occured \n";
     exit(1);
 }
 
-
 // print words:
 void print_words(vector<string> words)
 {
     auto it = words.begin();      // vector<string>::iterator it
-
+    
     while (it != words.end()) {
         cout << *it << endl;
         it++;
@@ -33,13 +30,11 @@ void print_words(vector<string> words)
 bool check_dictionary(const string& str1, unordered_set<string>& dictionary)
 {
     auto found = dictionary.find(str1);
-
     if (found == dictionary.end())
         return false;
 
     return true;
 } 
-
 
 
 /*
@@ -63,6 +58,7 @@ bool word_break(const string& str1, unordered_set<string>& dictionary)
     is a word in dictionary, then word_start[j] will be i*/
     int *word_start = new int[length];
 
+    // Initialize:
     for (i = 0; i < length; ++i) {
         is_break_possible[i] = false;
         word_start[i] = -1;
@@ -192,7 +188,6 @@ void test_02()
         handle_error();
     }
 
-
     cout << "________________________________________\n";
 }
 
@@ -205,3 +200,87 @@ int main(int argc, char** argv)
     cout << "Test passed \n";
     return 0;
 }
+
+
+/*
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <unordered_set>
+#include <algorithm>
+#include <cassert>
+
+using namespace std;
+
+void print_words(const vector<string>& words) {
+    for (const auto& word : words) {
+        cout << word << '\n';
+    }
+}
+
+bool is_compound_word(const string& word, const unordered_set<string>& dict) {
+    int n = word.size();
+    if (n == 0) return false;
+
+    // dp[i] is true if the prefix word[0...i-1] can be formed by dictionary words
+    vector<bool> dp(n + 1, false);
+    dp[0] = true;
+
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 0; j < i; ++j) {
+            // Skip checking the entire word against itself (j == 0 && i == n)
+            if (j == 0 && i == n) continue;
+
+            if (dp[j] && dict.count(word.substr(j, i - j))) {
+                dp[i] = true;
+                break; 
+            }
+        }
+    }
+    return dp[n];
+}
+
+string find_longest_compound_word(vector<string> words) {
+    unordered_set<string> dict(words.begin(), words.end());
+
+    // Sort longest words first using a lambda
+    sort(words.begin(), words.end(), [](const string& a, const string& b) {
+        return a.length() > b.length();
+    });
+
+    for (const auto& word : words) {
+        if (is_compound_word(word, dict)) {
+            return word;
+        }
+    }
+    return ""; // Return empty string if none found
+}
+
+void run_test(const vector<string>& words, const string& expected) {
+    print_words(words);
+    string longest = find_longest_compound_word(words);
+
+    if (!longest.empty())
+        cout << "Longest compound word = " << longest << '\n';
+    else
+        cout << "No compound word possible\n";
+
+    assert(longest == expected);
+    cout << "________________________________________\n";
+}
+
+
+
+
+// main code harnes:
+int main(int argc, char** argv) {
+    run_test({"hello", "jack", "lumber", "hellolumberjack", "hellojack"}, "hellolumberjack");
+    run_test({"hello", "jack", "lumber"}, "");
+
+    cout << "All tests passed!\n";
+    return 0;
+}
+
+
+*/

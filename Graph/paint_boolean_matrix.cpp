@@ -37,7 +37,7 @@ bool isValid(const vector<vector<int>>& arr, const Coordinate& step,
 // flipping the colors using DFS
 void flipColorDFS(vector<vector<int>>& arr, const Coordinate& curr){
 	// possible relative neighbor coordinates
-	vector<Coordinate> steps = { {1, 0}, {0, 1}, {-1, 0}, {0, -1} };
+	vector<Coordinate> steps = { {1, 0}, {0, 1}, {-1, 0}, {0, -1} };         // note: any order is possible 
 	
 	Coordinate next_step;
 	// matrix dimensions
@@ -50,7 +50,7 @@ void flipColorDFS(vector<vector<int>>& arr, const Coordinate& curr){
 	// flip the color of current tile
 	arr[curr.x][curr.y] = !color;
 	
-	// see the adjacent pixels
+	// see the adjacent pixels - iterate:
 	for(const auto& step: steps){
 		next_step.x = curr.x + step.x;
 		next_step.y = curr.y + step.y;
@@ -106,6 +106,9 @@ vector<vector<int>> flipColorBFS(vector<vector<int>> arr, const Coordinate& star
 	return arr;
 }
 
+
+
+// 
 void printMatrix(const vector<vector<int>>& arr){
 	for(const auto row: arr){
 		for(const auto pixel: row){
@@ -114,6 +117,7 @@ void printMatrix(const vector<vector<int>>& arr){
 		cout << endl;
 	}	
 }
+
 
 int main() {
 	// Input matrix

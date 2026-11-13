@@ -10,7 +10,7 @@ cur_row: Row in which the current queen should be placed
 col_for_row: col_for_row[i] gives column in which queen of the ith row is placed
 Return value: 1 if queen can be placed at col_for_row[cur_row], 0 otherwise
 */
-int check_placement(int cur_row, int col_for_row[])    // note how we are defining the function modules 
+int check_placement(int cur_row, int col_for_row[])        // note how we are defining the function modules 
 {
     int i, row_diff, col_diff;
 
@@ -27,8 +27,7 @@ int check_placement(int cur_row, int col_for_row[])    // note how we are defini
         if (row_diff == col_diff)
             return 0;       
          
-    }
-
+    }    
     return 1;
 }
 
@@ -61,7 +60,6 @@ void arrange_queens(int cur_row, int N, int col_for_row[])
             arrange_queens(cur_row + 1, N, col_for_row);
         }
     } 
-
 }
 
 // main code harness:

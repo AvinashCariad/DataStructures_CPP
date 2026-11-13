@@ -17,6 +17,7 @@ void BFS(vector <int> adjList[], vector <bool> visitedVertex, int source){
   queue <int> Q; //set up Queue for BFS
   int v;
   Q.push(source);
+  // while the Queue is not empty:
   while (!Q.empty()){
     v = Q.front();
     visitedVertex.at(v) = true;
@@ -33,7 +34,7 @@ void BFS(vector <int> adjList[], vector <bool> visitedVertex, int source){
 
 
 // main code harness:
-int main (void){
+int main (int argc, char** argv){
   // Idea is to implement the adjacency list as an array of vectors:
   const int numVertices = 6; // 6 vertices (0,1,2,3,4,5)
   int source = 0;

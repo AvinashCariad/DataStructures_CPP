@@ -31,11 +31,8 @@ public:
             return nullptr;
 
         queue<UndirectedGraphNode*> q;
-
         q.push(node);
-
         visited.insert(node);
-
         while (!q.empty())
         {
             auto cur = q.front();
@@ -61,8 +58,6 @@ public:
         return hashtable[node];
     }
 };
-
-
 
 
 /////////////////////////////////////////////////////////////
@@ -93,9 +88,9 @@ void printGraph(UndirectedGraphNode* node)
         {
             cout << n->label << " ";
 
-            if (!visited.count(n))
+            if (!visited.count(n))      // if key not in set
             {
-                visited.insert(n);
+                visited.insert(n);      // insert in visited
                 q.push(n);
             }
         }
@@ -107,8 +102,8 @@ void printGraph(UndirectedGraphNode* node)
 /////////////////////////////////////////////////////////////
 // Main
 /////////////////////////////////////////////////////////////
-
-int main()
+// main code harness:
+int main(int argc, char** argv)
 {
     //
     // Create Original Graph
@@ -139,3 +134,39 @@ int main()
 
     return 0;
 }
+
+
+
+
+/*
+
+#include <iostream>
+#include <unordered_map>
+#include <string>
+
+using namespace std;
+
+// main code harness:
+int main(int argc, char** argv) {
+    unordered_map<string, int> scores = {{"Alice", 95}, {"Bob", 80}};
+
+    if (scores.count("Alice") > 0) {
+        cout << "Alice is in the map!\n"; // Prints this (returns 1)
+    }
+
+    if (scores.count("Charlie") == 0) {
+        cout << "Charlie is NOT in the map.\n"; // Prints this (returns 0)
+    }
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+*/

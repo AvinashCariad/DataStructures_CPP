@@ -8,17 +8,11 @@ using namespace std;
 Given an undirected, connected and weighted graph, find Minimum Spanning Tree (MST) of the graph using Kruskal's algorithm.
 */
 
-
-
 // Structure to represent an edge in the graph
 struct Edge {
     int src, dest, weight;
 };
 
-// Comparator function to sort edges by weight in non-decreasing order
-bool compareEdges(const Edge& a, const Edge& b) {
-    return a.weight < b.weight;
-}
 
 // A standard DFS helper function to see if 'dest' is reachable from 'src'
 bool hasPath(int src, int dest, int parent, const vector<vector<int>>& mstAdj) {
@@ -35,11 +29,17 @@ bool hasPath(int src, int dest, int parent, const vector<vector<int>>& mstAdj) {
 }
 
 
+// Comparator function to sort edges by weight in non-decreasing order
+bool compareEdges(const Edge& a, const Edge& b) {
+    return a.weight < b.weight;
+}
 
-// Kruskal without DSU:
+
+
+// Kruskal without DSU (Disjoint Set Union):
 void kruskalWithoutDSU(int numVertices, vector<Edge>& edges) {
     // 1. Sort all edges in non-decreasing order of their weight
-    sort(edges.begin(), edges.end(), compareEdges);
+    sort(edges.begin(), edges.end(), compareEdges);                                                // sort(edges.begin(), edges.end(), [](const Edge& a, const Edge& b) {return a.weight < b.weight;});
 
     // This adjacency list tracks the structural connections inside our growing MST
     vector<vector<int>> mstAdj(numVertices);

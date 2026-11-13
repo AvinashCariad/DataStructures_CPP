@@ -137,7 +137,6 @@ void test_01()
 }
 
 
-
 void test_02()
 {
     int matrix[MAX_NUM_ROWS][MAX_NUM_COLS] = { 
@@ -173,3 +172,101 @@ int main(int argc, char** argv)
     printf("Test passed\n");
     return 0;
 }
+
+
+
+
+
+/*
+
+// more simplified version of the code:
+
+
+
+#include <assert.h>
+#include <stdio.h>
+
+#define ROWS 5
+#define COLS 5
+
+// Recursively marks all connected land cells (8 directions) as visited
+void dfs(int grid[ROWS][COLS], int visited[ROWS][COLS], int r, int c) {
+    // Stop if out of bounds, already visited, or water (0)
+    if (r < 0 || r >= ROWS || c < 0 || c >= COLS || visited[r][c] || grid[r][c] == 0) {
+        return;
+    }
+
+    visited[r][c] = 1;
+
+    // Visit all 8 neighboring cells
+    for (int dr = -1; dr <= 1; dr++) {
+        for (int dc = -1; dc <= 1; dc++) {
+            dfs(grid, visited, r + dr, c + dc);
+        }
+    }
+}
+
+int count_islands(int grid[ROWS][COLS]) {
+    int visited[ROWS][COLS] = {0}; // Automatically initializes all cells to 0
+    int count = 0;
+
+    for (int r = 0; r < ROWS; r++) {
+        for (int c = 0; c < COLS; c++) {
+            if (grid[r][c] == 1 && !visited[r][c]) {
+                dfs(grid, visited, r, c);
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
+
+// main code harness:
+int main(int argc, char** argv) {
+    int grid1[ROWS][COLS] = {
+        {1, 1, 1, 0, 0},
+        {0, 1, 0, 0, 1},
+        {0, 0, 0, 1, 0},
+        {0, 0, 0, 0, 0},
+        {0, 1, 0, 1, 0}
+    };
+    assert(count_islands(grid1) == 4);
+
+    int grid2[ROWS][COLS] = {
+        {1, 1, 1, 0, 0},
+        {0, 1, 1, 0, 0},
+        {1, 0, 1, 0, 0},
+        {1, 0, 1, 0, 0},
+        {0, 1, 1, 1, 0}
+    };
+    assert(count_islands(grid2) == 1);
+
+    printf("All tests passed!\n");
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/

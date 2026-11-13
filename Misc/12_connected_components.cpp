@@ -141,8 +141,8 @@ void test_03()
 }
 
 
-
-int main()
+// main code harness:
+int main(int argc, char** argv)
 {
     test_01();
 

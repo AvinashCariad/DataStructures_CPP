@@ -32,8 +32,6 @@ void generate_permutations(char *str1, char *buf, unsigned int pos,
     }
 }
 
-
-
 void test(char *str1)
 {
     unsigned int length = strlen(str1);

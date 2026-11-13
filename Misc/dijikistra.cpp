@@ -9,10 +9,10 @@ using namespace std;
  * the time complexity of the algorithm is O(V + ElogV).
  */
 
-typedef pair<int, int> Pair; // First = Weight & Second = Vertex
-const int numVertices = 6; // 6 vertices (0,1,2,3,4,5)
+typedef pair<int, int> Pair;                           // First = Weight & Second = Vertex
+const int numVertices = 6;                             // 6 vertices (0,1,2,3,4,5)
 vector <bool> visitedVertex(numVertices, false);
-int ShortestPath[numVertices]; // Have an array to store the shortest path
+int ShortestPath[numVertices];                         // Have an array to store the shortest path
 
 
 // create graph:
@@ -21,10 +21,9 @@ void createAndAddEdge(vector <Pair> adjList[], int u, int weight, int v){
 } // createAndAddEdge(vector <int> List[], int u, int v, int weight)
 
 
-
-
+// Dijikstra Algorithm:
 void DijkstrasAlgorithm(vector <Pair> adjList[], int source){
-  priority_queue<Pair, vector<Pair>, greater<Pair> > PQ; // Set up priority queue
+  priority_queue<Pair, vector<Pair>, greater<Pair> > PQ; // Set up priority queue - min heap
   Pair info;
   int weight;
   ShortestPath[source] = 0; // Set source distance to zero
@@ -56,7 +55,7 @@ void DijkstrasAlgorithm(vector <Pair> adjList[], int source){
 
 
 
-// Driver function
+// Driver function- main code harness:
 int main (int argc, char** argv){
 
   int source = 0;
@@ -78,3 +77,110 @@ int main (int argc, char** argv){
   cout << endl;
 
 } 
+
+
+
+
+/*
+// code for longest path:
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <climits> // For INT_MIN
+
+using namespace std;
+
+typedef pair<int, int> Pair; // First = Weight & Second = Vertex
+const int numVertices = 6;
+int LongestPath[numVertices]; // Array to store the longest path
+
+// Create graph
+void createAndAddEdge(vector<Pair> adjList[], int u, int weight, int v) {
+    adjList[u].push_back(make_pair(weight, v));
+}
+
+// Modified Dijkstra-style Max Path (Works ONLY on Directed Acyclic Graphs)
+void LongestPathAlgorithm(vector<Pair> adjList[], int source) {
+    // 1. Use a Max-Heap (default priority_queue) to pick largest weights first
+    priority_queue<Pair> PQ; 
+    
+    // 2. Initialize all distances to negative infinity
+    for (int i = 0; i < numVertices; i++) {
+        LongestPath[i] = INT_MIN;
+    }
+
+    LongestPath[source] = 0;
+    PQ.push(make_pair(0, source));
+
+    while (!PQ.empty()) {
+        Pair info = PQ.top();
+        PQ.pop();
+        
+        int u = info.second;
+        int weight = info.first;
+
+        // Skip outdated entries in the queue
+        if (weight < LongestPath[u]) {
+            continue;
+        }
+
+        // NOTE: Do NOT use visitedVertex here. A node may need to be updated 
+        // multiple times if a longer path to it is discovered later.
+
+        for (auto it = adjList[u].begin(); it != adjList[u].end(); it++) {
+            int edgeWeight = it->first;
+            int v = it->second;
+
+            // 3. Flip '<' to '>' to maximize distance
+            if (LongestPath[u] + edgeWeight > LongestPath[v]) {
+                LongestPath[v] = LongestPath[u] + edgeWeight;
+                PQ.push(make_pair(LongestPath[v], v));
+            }
+        }
+    }
+}
+
+// main code harness:
+int main(int argc, char** argv) {
+    int source = 0;
+    vector<Pair> adjList[numVertices];
+
+    createAndAddEdge(adjList, 0, 5, 1);
+    createAndAddEdge(adjList, 0, 10, 3);
+    createAndAddEdge(adjList, 1, 2, 2);
+    createAndAddEdge(adjList, 1, 10, 5);
+    createAndAddEdge(adjList, 1, 5, 4);
+    createAndAddEdge(adjList, 2, 1, 3);
+    createAndAddEdge(adjList, 2, 5, 4);
+    // createAndAddEdge(adjList, 2, 3, 0); // REMOVED: Creates cycle 0->1->2->0 (infinite max path)
+    createAndAddEdge(adjList, 4, 2, 5);
+
+    LongestPathAlgorithm(adjList, source);
+
+    cout << "Longest path from source vertex " << source << ": ";
+    for (int i = 0; i < numVertices; i++) {
+        if (LongestPath[i] == INT_MIN)
+            cout << "INF ";
+        else
+            cout << LongestPath[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/

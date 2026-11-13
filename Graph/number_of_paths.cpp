@@ -145,6 +145,8 @@ static void test() {
  * @brief Main function
  * @returns 0 on exit
  */
+
+// main code harness:
 int main(int argc, char** argv) {
     test(); // Run self-test implementations
     return 0;
@@ -299,7 +301,56 @@ int main() {
 
 
 
+#include <iostream>
+#include <vector>
 
+using namespace std;
+
+// Helper function to count simple paths using DFS + backtracking
+int dfs(int current, int target, const vector<vector<int>>& adj, vector<bool>& visited) {
+    // Reached the destination
+    if (current == target) {
+        return 1;
+    }
+
+    visited[current] = true; // Mark node as part of the current path
+    int total_paths = 0;
+
+    for (int neighbor : adj[current]) {
+        if (!visited[neighbor]) {
+            total_paths += dfs(neighbor, target, adj, visited);
+        }
+    }
+
+    visited[current] = false; // Backtrack so other paths can use this node
+    return total_paths;
+}
+
+// Main wrapper function
+int countPaths(int n, const vector<vector<int>>& adj, int start, int end) {
+    if (start < 0 || start >= n || end < 0 || end >= n) {
+        return 0; // Out-of-bounds check
+    }
+    vector<bool> visited(n, false);
+    return dfs(start, end, adj, visited);
+}
+
+
+// main code harness:
+int main(int argc, char** argv) {
+    int n = 5;
+    vector<vector<int>> adj(n);
+
+    // Build a directed graph (including a cycle: 0 -> 1 -> 2 -> 0)
+    adj[0] = {1};
+    adj[1] = {2, 3};
+    adj[2] = {0, 4};
+    adj[3] = {2, 4};
+
+    cout << "Number of paths from 0 to 4: " << countPaths(n, adj, 0, 4) << endl;
+
+    return 0;
+}
 
 
 

@@ -4,7 +4,7 @@
 
 // Structure to represent a weighted edge in the graph
 struct Edge {
-    int src, dest, weight;
+    int src, dest, weight;        // define the features of edge
 };
 
 /**
@@ -42,7 +42,7 @@ std::vector<int> bellmanFord(int V, const std::vector<Edge>& edges, int src) {
             int weight = edge.weight;
             
             // If the source vertex has a valid distance, relax the edge
-            if (dist[u] != INT_MAX && dist[u] + weight < dist[v]) {
+            if (dist[u] != INT_MAX && dist[u] + weight < dist[v]) {               // note how the condition is used here
                 dist[v] = dist[u] + weight;
             }
         }
@@ -63,7 +63,6 @@ std::vector<int> bellmanFord(int V, const std::vector<Edge>& edges, int src) {
 
     return dist;
 }
-
 
 
 // main code harness:

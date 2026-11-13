@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// good alternative to using enum for color coding
 #define WHITE 0
 #define GRAY 1
 #define BLACK 2
@@ -120,7 +121,6 @@ void test_01()
 }
 
 
-
 void test_02()
 {
     /*Construct a graph with a cycle
@@ -153,8 +153,8 @@ void test_02()
 }
 
 
-
-int main()
+// main code harness:
+int main(int argc, char *argv[])
 {
     test_01();
 

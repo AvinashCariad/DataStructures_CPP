@@ -70,6 +70,7 @@ int findSequence(unordered_set<string>& dict, const string& s, const string& t){
 	return -1;	
 }
 
+
 // main code harness:
 int main(int argc, char** argv){
 	unordered_set<string> dict = {"mug", "dug", "jug", "lug", "lag"};

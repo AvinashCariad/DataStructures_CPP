@@ -124,7 +124,9 @@ void printMatrix(const vector<vector<int>>& mat){
 	}	
 }
 
-int main() {
+
+// main code harness:
+int main(int argc, char** argv) {
 	vector< vector<int> > mat = {
 								{0, 0, 1, 1, 1},
 								{0, 1, 1, 0, 1},

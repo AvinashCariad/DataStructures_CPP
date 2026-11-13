@@ -24,7 +24,7 @@ struct WeightedEdge {
 struct Vertex {
 	int data;
 	vector<WeightedEdge> edges;
-	Vertex(int data) : data(data), edges(vector<WeightedEdge>{}) {};
+	Vertex(int data) : data(data), edges(vector<WeightedEdge>{}) {};        // note the initialization 
 };
 
 // Creates a graph node
@@ -659,6 +659,7 @@ vector<vector<int>> floydWarshall(vector<Vertex*>& g) {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
+// main code harness:
 int main() {
 	vector<Vertex*> g = createGraph(5);
 
@@ -789,3 +790,106 @@ int main() {
 	deleteGraph(g3);
 	return 0;
 }
+
+
+
+
+/*
+
+// code that brings out the difference between DFS and Topological sort:
+
+#include <iostream>
+#include <vector>
+#include <stack>
+
+using namespace std;
+
+// Helper function to add a directed edge u -> v
+void addEdge(vector<int> adj[], int u, int v) {
+    adj[u].push_back(v);
+}
+
+// 1. Standard Depth-First Search (DFS)
+// Explores nodes immediately as it encounters them (Pre-order)
+void standardDFS(int u, vector<int> adj[], vector<bool>& visited, vector<int>& dfsOrder) {
+    visited[u] = true;
+    dfsOrder.push_back(u); // Record node as soon as we visit it
+
+    for (int v : adj[u]) {
+        if (!visited[v]) {
+            standardDFS(v, adj, visited, dfsOrder);
+        }
+    }
+}
+
+// 2. Topological Sort using DFS
+// Records nodes ONLY AFTER all of their outgoing neighbors are finished (Post-order)
+void topoSortHelper(int u, vector<int> adj[], vector<bool>& visited, stack<int>& topoStack) {
+    visited[u] = true;
+
+    for (int v : adj[u]) {
+        if (!visited[v]) {
+            topoSortHelper(v, adj, visited, topoStack);
+        }
+    }
+
+    // Push to stack after exploring all dependencies
+    topoStack.push(u);
+}
+
+
+// main code harness:
+int main(int argc, char** argv) {
+    const int numVertices = 6;
+    vector<int> adj[numVertices];
+
+    // Build a Directed Acyclic Graph (DAG)
+    // Edges represent dependencies (e.g., 5 -> 2 means 5 must come before 2)
+    addEdge(adj, 5, 2);
+    addEdge(adj, 5, 0);
+    addEdge(adj, 4, 0);
+    addEdge(adj, 4, 1);
+    addEdge(adj, 2, 3);
+    addEdge(adj, 3, 1);
+
+    // --- PART 1: Run Standard DFS ---
+    vector<bool> visitedDFS(numVertices, false);
+    vector<int> dfsResult;
+
+    // Loop over all vertices to ensure disconnected components are also visited
+    for (int i = 0; i < numVertices; i++) {
+        if (!visitedDFS[i]) {
+            standardDFS(i, adj, visitedDFS, dfsResult);
+        }
+    }
+
+    cout << "Standard DFS Traversal Order: ";
+    for (int node : dfsResult) {
+        cout << node << " ";
+    }
+    cout << "\n";
+
+    // --- PART 2: Run Topological Sort ---
+    vector<bool> visitedTopo(numVertices, false);
+    stack<int> topoStack;
+
+    for (int i = 0; i < numVertices; i++) {
+        if (!visitedTopo[i]) {
+            topoSortHelper(i, adj, visitedTopo, topoStack);
+        }
+    }
+
+    cout << "Topological Sort Order:       ";
+    while (!topoStack.empty()) {
+        cout << topoStack.top() << " ";
+        topoStack.pop();
+    }
+    cout << "\n";
+
+    return 0;
+}
+
+
+
+
+*/

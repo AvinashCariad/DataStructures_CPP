@@ -73,7 +73,6 @@ public:
     }
 };
 
-
 // main code harness:
 int main(int argc, char** argv) {
     // Define initial setup configuration: 4 nodes

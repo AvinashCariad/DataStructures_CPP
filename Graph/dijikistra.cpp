@@ -29,7 +29,7 @@ public:
     void dijkstra(int src) {
         // Step 1: Create a min-heap priority queue
         // Stores pairs of {distance, vertex}. Sorted by the first element (distance).
-        priority_queue<iPair, vector<iPair>, greater<iPair>> pq;
+        priority_queue<iPair, vector<iPair>, greater<iPair>> pq;            // min heap
 
         // Step 2: Initialize distance array with infinity (INT_MAX)
         vector<int> dist(V, INT_MAX);

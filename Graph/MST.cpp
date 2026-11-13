@@ -7,11 +7,36 @@
 using namespace std;
 
 /*
+
+The problem definition for a Minimum Spanning Tree (MST) involves finding a subset of edges in a connected, edge-weighted, 
+undirected graph that connects all the vertices together without any cycles, while keeping the sum of the edge weights as 
+small as possible.
+
+Given an undirected, connected, and edge-weighted graph G = (V, E), where:
+• V is the set of vertices (nodes).
+• E is the set of edges, and each edge e ∈ E has an associated real-weight w(e).
+A spanning tree T = (V, E') is a subgraph that is a tree (acyclic and connected) and contains all the vertices of G, which means it uses exactly |V| - 1 edges.
+The Minimum Spanning Tree problem is to find a spanning tree \(T^{*}\) such that the total weight:
+\(w(T^{*})=\sum _{e\in E^{\prime }}w(e)\)
+is minimized over all possible spanning trees T of G
  
 Recommended Implementation Choice
 
 • Use Kruskal's Algorithm if your graph is sparse (fewer edges). It sorts all edges globally and uses Union-Find to avoid cycles.
 • Use Prim's Algorithm if your graph is dense (lots of edges). It builds outward from a starting node using a priority queue.
+
+Running a Minimum Spanning Tree (MST) algorithm on a cyclic graph works normally and produces a valid, acyclic spanning tree.
+In fact, cycles are the exact reason MST algorithms exist, because a connected graph with no cycles is already a tree.
+
+
+How MST Algorithms Handle Cycles
+
+• Cycle Prevention: Standard MST algorithms actively detect and avoid cycles while building the tree. They select the cheapest edges needed to connect all vertices without creating a closed loop.
+• Kruskal's Approach: Kruskal's algorithm sorts all edges by weight and uses a data structure like Union-Find to check endpoints. If two vertices already share
+the same root, adding that edge would complete a cycle, so the algorithm simply skips it.
+• Prim's Approach: Prim's algorithm grows a tree from a starting node by tracking visited vertices. It only considers edges that connect a visited vertex to an unvisited vertex,
+ which naturally ignores any edge that loops back to an already-visited node.
+
 */
 
 
@@ -25,7 +50,7 @@ struct WeightedEdge {
 struct Vertex {
     int data;
     vector<WeightedEdge> edges;
-    Vertex(int data) : data(data), edges({}) {}
+    Vertex(int data) : data(data), edges({}) {}           // note this initialization 
 };
 
 // --- Comparator for Prim's Priority Queue ---
@@ -35,6 +60,14 @@ struct CompareEdge {
         return e1.weight > e2.weight; // Min-heap behavior
     }
 };
+
+/*
+This C++ code implements a Disjoint Set Union (DSU), also known as a Union-Find data structure.
+It tracks which nodes belong to the same connected group, allowing Kruskal's algorithm to quickly
+detect if adding a new edge would create a cycle.
+
+*/
+
 
 // --- Union-Find Infrastructure (For Kruskal's) ---
 class UnionFind {
@@ -161,7 +194,9 @@ void printMSTResult(const string& algo_name, const vector<WeightedEdge>& mst) {
     cout << "Total MST Weight Cost: " << total_weight << "\n" << endl;
 }
 
-int main() {
+
+// main code harness:
+int main(int argc, char** argv) {
     int vertices = 6;
     vector<unique_ptr<Vertex>> graph;
     for (int i = 0; i < vertices; i++) {

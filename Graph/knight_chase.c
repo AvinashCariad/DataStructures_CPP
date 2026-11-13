@@ -112,7 +112,6 @@ void solve(int pawn_row, int pawn_col,
 }
 
 
-
 // main code harness:
 int main(void) {
   int num_cases, i;

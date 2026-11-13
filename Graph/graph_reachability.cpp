@@ -15,7 +15,6 @@
 	TC: O(E), E: no. of edges
 */
 
-
 #include<iostream>
 #include<vector>
 #include<unordered_map>
@@ -139,7 +138,9 @@ void printGraph(const unordered_map<string, unordered_set<string>>& g){
 	
 }
 
-int main() {
+
+// main code harness:
+int main(int argc, char** argv) {
 	// match outcomes
 	vector<MatchResults> matches = {
 									{"A", "C"}, {"C", "D"}, {"C", "E"}, 

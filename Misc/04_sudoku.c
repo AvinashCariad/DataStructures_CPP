@@ -4,6 +4,34 @@
 #define NUM_ROWS 9
 #define NUM_COLS 9
 
+
+/*
+The problem statement for this code is to solve a standard 9x9 Sudoku puzzle using recursive backtracking. Given a partially filled 9x9 grid where empty cells are represented by -1,
+the program must fill in all empty cells with digits from 1 to 9 and print every valid solution.
+
+Problem Rules & Constraints
+
+To be considered a valid solution, the filled grid must satisfy standard Sudoku rules:
+• Row uniqueness: Each row must contain the digits 1 through 9 with no repetition.
+• Column uniqueness: Each column must contain the digits 1 through 9 with no repetition.
+• Subgrid uniqueness: Each of the nine 3x3 sub-boxes must contain the digits 1 through 9 with no repetition.
+
+
+Input & Output Format
+
+• Input: A 2D integer array (9x9) initialized with -1 for empty cells and fixed numbers (1–9) for pre-filled clues.
+• Output: The completed 9x9 grid printed to the console whenever a valid configuration is reached, followed by a verification check ensuring row and column sums equal 45.
+
+How the Algorithm Works
+
+• Cell Validation (can_fill_cell): Before placing a candidate number (1–9) into an empty cell, the function checks the target row, column, and 3x3 region to ensure the digit does not already exist.
+• Backtracking (solve_sudoku): The solver moves cell-by-cell from left to right and top to bottom. When it hits -1, it tries numbers 1 through 9 recursively and resets the cell back to -1 if a path fails to produce a solution.
+• Solution Verification (verify_grid): Once the solver reaches past the last row, it prints the solved board and verifies that every row and column sums to 45.
+
+*/
+
+
+// handle error:
 void handle_error()
 {
     printf("Error occured \n");
@@ -11,6 +39,7 @@ void handle_error()
 }
 
 
+// verify grid:
 void verify_grid(int grid[][NUM_COLS])
 {
     int row_nr, col_nr, sum;
@@ -41,7 +70,7 @@ void verify_grid(int grid[][NUM_COLS])
     /*We should also check if the sum in every 3*3 box is 45*/
 }
 
-
+// print grid:
 void print_grid(int grid[][NUM_COLS], int verify)
 {
     int i, j;
@@ -57,8 +86,6 @@ void print_grid(int grid[][NUM_COLS], int verify)
     if (verify)
         verify_grid(grid);
 }
-
-
 
 
 /* Helper function which checks if it is possible to place a number in a cell
@@ -131,7 +158,7 @@ void solve_sudoku(int grid[][NUM_COLS], int row_nr, int col_nr)
         /*Once we are done trying all numbers from 1-9, assign the cell
         back to -1 to indicate puzzle writer has not assigned a number 
         to the cell*/
-        grid[row_nr][col_nr] = -1;
+        grid[row_nr][col_nr] = -1;          // note this is backtracking step
 
     } else {
         /*The puzzle writer has already assigned a value to the cell. 
@@ -140,8 +167,8 @@ void solve_sudoku(int grid[][NUM_COLS], int row_nr, int col_nr)
     }
 }
 
-
-int main()
+// main code harness:
+int main(int argc, char *argv[])
 {
     int grid[NUM_ROWS][NUM_COLS];
     int i, j;

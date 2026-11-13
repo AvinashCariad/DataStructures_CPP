@@ -31,10 +31,18 @@ k is an intermediate vertex in shortest path from i to j. We update the value of
 
 https://www.geeksforgeeks.org/cpp/floyd-warshall-algorithm-cpp/
 
+
+Initialize Vector of Vector:
+int rows = 5;
+int cols = 4;
+
+// Creates a 5x4 grid where every element is initialized to 0
+vector<vector<int>> grid(rows, vector<int>(cols, 0));
+
+// Creates a 5x4 grid of booleans initialized to false
+vector<vector<bool>> visited(rows, vector<bool>(cols, false));
+
 */
-
-
-
 
 using namespace std;
 
