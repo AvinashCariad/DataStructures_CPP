@@ -48,7 +48,9 @@ vector<string> center(const vector<string>& picture)
     return centered_picture;
 }
 
-int main()
+
+// main code harness:
+int main(int argc, char** argv)
 {
     vector<string> picture;
     // create a picture

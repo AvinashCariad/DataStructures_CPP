@@ -26,9 +26,14 @@ double analysis(const vector<Student_info>& students,
 
 // code is taken from §6.2.4/116
 // median of the nonzero elements of s.homework, or 0 if no such elements exist
+// calculates a student's final grade by taking the median of only their submitted (non-zero)
+// homework assignments, ignoring any missed assignments scored as 0.
 double optimistic_median(const Student_info& s)
 {
     vector<double> nonzero;
+    // remove_copy(s.homework.begin(), s.homework.end(), back_inserter(nonzero), 0);
+    // iterates through the student's homework vector and copies every element except
+    // those equal to 0 into nonzero. (Note: remove_copy does not modify the original s.homework vector.)
     remove_copy(s.homework.begin(), s.homework.end(),
         back_inserter(nonzero), 0);
 

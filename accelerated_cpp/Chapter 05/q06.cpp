@@ -22,7 +22,7 @@ vector<Student_info> extract_fails(vector<Student_info>& students)
     while (i != students.size()) {
         if (students[i].final_grade < 60) {
             fail.push_back(students[i]);
-            students.erase(students.begin() + i);
+            students.erase(students.begin() + i);  
         } else
             ++i;
     }

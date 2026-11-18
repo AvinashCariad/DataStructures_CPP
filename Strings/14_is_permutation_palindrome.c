@@ -46,6 +46,8 @@ int is_permutation_palindrome(char str1[])
 }
 
 
+
+// test harness to validate results:
 void test(char str1[], int expected_result)
 {
     int result;

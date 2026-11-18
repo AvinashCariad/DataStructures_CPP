@@ -26,7 +26,9 @@ vector<Student_info> extract_fails(vector<Student_info>& students)
     return fails;
 }
 
-int main()
+
+// main code harness:
+int main(int argc, char** argv)
 {
     vector<Student_info> students;
     Student_info student;
